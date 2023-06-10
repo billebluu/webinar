@@ -83,4 +83,11 @@ class UsersController extends Controller
         $model->delete();
         return redirect('users');
     }
+
+
+    public function layout_user(){
+        return view('users');
+    }
 }
+
+
