@@ -123,9 +123,15 @@
                                 <td align="center">{{ $value->asal_instansi }}</td>
                                 <td align="center">{{ $value->no_telp }}</td>
                                 <td>
-                                    <a href="{{url('users/update')}}">UPDATE</a>
-                                    <a href="{{url('users/delete')}}">DELETE</a>
+                                    <a class="btn btn-secondary" href="{{url('users/'.$value->id.'/edit')}}">UPDATE</a>                               
                                 </td>
+                                <td>
+                                    <form action="{{ url('users/'.$value->id )}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button class="btn btn-secondary" type="submit">DELETE</button>
+                                    </form>
+                                </td> 
                         </tr>
                             <?php $i++; ?>
                             @endforeach

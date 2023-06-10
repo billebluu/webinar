@@ -54,7 +54,8 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $model = User::find($id);
+        return view('edit', compact('model'));
     }
 
     /**
@@ -62,7 +63,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $model = User::find($id);
+        $model->password = 1;
+        $model->nama_user = $request->nama_user;
+        $model->email_user = $request->email_user;
+        $model->asal_instansi = $request->asal_instansi;
+        $model->no_telp = $request->no_telp;
+        $model->save();
+
+        return redirect('users');
     }
 
     /**
@@ -70,6 +79,8 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $model = User::find($id);
+        $model->delete();
+        return redirect('users');
     }
 }
