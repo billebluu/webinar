@@ -85,9 +85,18 @@ class UsersController extends Controller
     }
 
 
-    public function layout_user(){
+    public function layout_users(){
         return view('users');
     }
+
+    public function create_layout(){
+        return view('users');
+    }
+
+    public function edit_layout(){
+        return view('users');
+    }
+
 }
 
 

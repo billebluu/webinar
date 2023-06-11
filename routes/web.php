@@ -16,6 +16,8 @@ use App\Http\Controllers\UsersController;
 
 Route::get('/', [UsersController::class, 'index']);
 Route::get('/users', [UsersController::class, 'users_layout']);
+Route::get('/users', [UsersController::class, 'create_layout']);
+Route::get('/users', [UsersController::class, 'edit_layout']);
 Route::resource('/users', UsersController::class);
 Route::post('/users', [UsersController::class, 'store']);
 // Route::resource('users/form',UsersController::class);

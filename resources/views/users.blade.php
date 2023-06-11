@@ -40,12 +40,12 @@
     <div class="notice-section">
         <div class="container">
             <h1>Daftar User</h1><br><br>
-            <button style="background-color: rgb(244, 172, 78); border-radius: 7px; border-color: rgb(244, 172, 78);" type="button" onclick="window.location.href='{{url('users/create')}}'" style="color: rgb(0, 0, 0);">TAMBAH USULAN BUKU</button>
+            <button style="background-color: rgb(244, 172, 78); border-radius: 7px; border-color: rgb(244, 172, 78);" type="button" onclick="window.location.href='{{url('users/create')}}'" style="color: rgb(0, 0, 0);">TAMBAH USER</button>
             <br><br>
-            <form action="" method="post" class="d-flex" role="search">
+            <!-- <form action="" method="post" class="d-flex" role="search">
                 <input class="form-control me-2" type="text" name="keyword" size="20" autofocus autocomplete="off" placeholder="Masukkan Keyword" aria-label="Search">
                 <button style="background-color: rgb(244, 172, 78); border-radius: 7px; border-color: rgb(244, 172, 78);" type="submit" name="search">Search</button>
-            </form>
+            </form> -->
             <br>
             <div class="card">
                 <div class="card-body" style="background-color: rgb(244, 172, 78); border-radius: 7px;">

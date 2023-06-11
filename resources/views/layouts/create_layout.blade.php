@@ -42,7 +42,7 @@
                     <a class="nav-link active" href="{{url('books')}}" style="color: rgb(0, 0, 0);">Daftar User</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url('form')}}" style="color: rgb(0, 0, 0);">Daftar Event</a>
+                    <a class="nav-link" href="{{url('form')}}" style="color: rgb(0, 0, 0);">Daftar Event Webinar</a>
                   </li>
                   <!-- <li class="nav-item">
                     <a class="nav-link" href="denda.php" style="color: rgb(0, 0, 0);">Perhitungan Denda</a>
@@ -57,8 +57,7 @@
     </div>
 
     <div class="container">
-        @yield('content')
-
+        @yield('create')
     </div>
     
 </body>

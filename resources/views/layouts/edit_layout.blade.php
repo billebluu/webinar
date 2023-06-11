@@ -37,7 +37,7 @@
                   </li>
                   <!-- <li class="nav-item">
                     <a class="nav-link" href="profil.php" style="color: rgb(0, 0, 0);">Profil</a>
-                  </li> -->
+                  </li>  -->
                   <li class="nav-item">
                     <a class="nav-link active" href="{{url('books')}}" style="color: rgb(0, 0, 0);">Daftar User</a>
                   </li>
@@ -49,7 +49,7 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="logout.php" style="color: rgb(0, 0, 0);">Logout</a>
-                  </li> -->
+                  </li>  -->
                 </ul>
               </div>
             </div>
@@ -57,9 +57,10 @@
     </div>
 
     <div class="container">
-        @yield('content')
-
+        @yield('edit')
     </div>
     
 </body>
-</html>
+</html> 
+
+
