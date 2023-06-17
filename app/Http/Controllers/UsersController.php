@@ -27,9 +27,9 @@ class UsersController extends Controller
         // $datas = User::all();
         // return view('users', compact('datas'));
         // $user = User::all();
-        $user = User::all()->where('id', 5)->first();
+        $user = User::all()->where('id', 3)->first();
 
-        return view('profile.users',['user' => $user]);
+        return view('profile.view-user',['user' => $user]);
 
     }
 
@@ -71,8 +71,8 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        $model = User::find($id);
-        return view('edit', compact('model'));
+        $user = User::find(3);
+        return view('profile.edit-user', compact('user'));
     }
 
     /**
@@ -88,7 +88,7 @@ class UsersController extends Controller
         $model->no_telp = $request->no_telp;
         $model->save();
 
-        return redirect('users');
+        return redirect('profile')->with('success', 'Profil berhasil diperbarui');
     }
 
     /**

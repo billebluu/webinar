@@ -13,6 +13,9 @@ class PIC_SeminarController extends Controller
      */
     public function index()
     {
+        $seminar = PIC_Seminar::all();
+
+        return view('dashboard.details-seminar',['seminar' => $seminar]);
     }
 
     /**
@@ -36,7 +39,9 @@ class PIC_SeminarController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $seminar = PIC_Seminar::find($id);
+
+        return view('dashboard.details-seminar',['seminar' => $seminar]);
     }
 
     /**

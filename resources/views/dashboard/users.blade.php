@@ -217,7 +217,7 @@
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-3" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><img src="{{ asset('assets/img/skills.png') }}" width="90%" align="center"></div>
-              <h4><a href="">{{ $row->nama_seminar }}</a></h4>
+              <h4><a href="{{ route('dashboard.details-seminar', $row->id) }}">{{ $row->nama_seminar }}</a></h4>
               <p>
                   <b>Tanggal:</b> {{ date('d-m-Y', strtotime($row->tanggal_seminar)) }} <br>
                   <b>Lokasi:</b> {{ $row->lokasi_seminar }} <br>

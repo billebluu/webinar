@@ -1,3 +1,4 @@
+<!-- ======= Header ======= -->
 <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center">
 
@@ -14,10 +15,10 @@
           <li>
             <form action="" method="post" class="d-flex" role="search">
                 <input class="form-control me-2" type="text" name="keyword" size="20" style="padding-right:50px"autofocus autocomplete="off" placeholder="Masukkan Keyword" aria-label="Search">
-                <button class="search" type="submit" name="search">Search</button>
+                <button class="search2" type="submit" name="search2">Search</button>
             </form>
           </li>
-          <li><a class="nav-link scrollto" href="#">Dashboard</a></li>
+          <li><a class="nav-link scrollto" href="{{url('dashboard')}}">Dashboard</a></li>
           <li class="dropdown"><a href="#"><span>Pengguna</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{url('profile')}}">Lihat Profil</a></li>

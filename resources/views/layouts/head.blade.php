@@ -23,6 +23,7 @@
   <!-- Template Main CSS File -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"/>
 
+
   <!-- =======================================================
   * Template Name: Arsha
   * Updated: May 30 2023 with Bootstrap v5.3.0

@@ -17,7 +17,7 @@
                 <button class="search" type="submit" name="search">Search</button>
             </form>
           </li>
-          <li><a class="nav-link scrollto" href="#team">Dashboard</a></li>
+          <li><a class="nav-link scrollto" href="{{url('dashboard')}}">Dashboard</a></li>
           <li class="dropdown"><a href="#"><span>Pengguna</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{url('profile')}}">Lihat Profil</a></li>

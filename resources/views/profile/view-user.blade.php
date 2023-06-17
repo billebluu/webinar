@@ -1,4 +1,4 @@
-@extends('layouts.main2')
+@extends('layouts.main-ip')
 @section('title','SeminarKu')
 
     
@@ -10,8 +10,8 @@
       <div class="container">
 
         <ol>
-          <li><a href="index.html">Pengguna</a></li>
-          <li>Profile</li>
+			<li><a href="{{url('dashboard')}}">Dashboard</a></li>        
+			<li>Profile</li>
         </ol>
         <!-- <h2>Inner Page</h2> -->
 
@@ -27,7 +27,7 @@
 				<div class="card">
 					<div class="card-body">
 						<div>
-							<h4>Profile Saya  <a href="{{'edit'}}"><i class="bi bi-pencil"></i></a></h4>
+						<h4>Profile Saya <a href="{{ route('users.edit', $user->id) }}"><i class="bi bi-pencil"></i></a></h4>
 						</div>
 						<div style="padding-top: 20px">
 							<table class="table">
