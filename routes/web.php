@@ -15,6 +15,7 @@ use App\Http\Controllers\UsersController;
 */
 
 Route::get('/', [UsersController::class, 'index']);
+Route::get('/profile', [UsersController::class, 'index_profile']);
 Route::get('/users', [UsersController::class, 'users_layout']);
 Route::get('/users', [UsersController::class, 'create_layout']);
 Route::get('/users', [UsersController::class, 'edit_layout']);

@@ -1,8 +1,7 @@
-
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    <div class="footer-newsletter">
+    <!-- <div class="footer-newsletter">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6">
@@ -67,11 +66,11 @@
 
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="container footer-bottom clearfix">
       <div class="copyright">
-        &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>SeminarKu</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title','Website Perpustakaan MCU')
+@section('title','SeminarKu')
 
     
     @section('container')
@@ -8,12 +8,12 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-          <h1>Better Solutions For Your Business</h1>
-          <h2>We are team of talented designers making websites with Bootstrap</h2>
-          <div class="d-flex justify-content-center justify-content-lg-start">
+          <h1>Discover Exciting Events</h1>
+          <h2>Explore a Wide Array of Engaging Activities!</h2>
+          <!-- <div class="d-flex justify-content-center justify-content-lg-start">
             <a href="#about" class="btn-get-started scrollto">Get Started</a>
             <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
-          </div>
+          </div> -->
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
           <img src="{{ asset('assets/img/hero-img.png')}}" class="img-fluid animated" alt="">
@@ -26,7 +26,7 @@
   <main id="main">
 
     <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients section-bg">
+    <!-- <section id="clients" class="clients section-bg">
       <div class="container">
 
         <div class="row" data-aos="zoom-in">
@@ -58,10 +58,10 @@
         </div>
 
       </div>
-    </section><!-- End Cliens Section -->
+    </section>End Cliens Section -->
 
     <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
+    <!-- <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -91,9 +91,9 @@
         </div>
 
       </div>
-    </section><!-- End About Us Section -->
+    </section> End About Us Section -->
 
-    <!-- ======= Why Us Section ======= -->
+    <!-- ======= Why Us Section ======= 
     <section id="why-us" class="why-us section-bg">
       <div class="container-fluid" data-aos="fade-up">
 
@@ -146,9 +146,9 @@
         </div>
 
       </div>
-    </section><!-- End Why Us Section -->
+    </section> End Why Us Section -->
 
-    <!-- ======= Skills Section ======= -->
+    <!-- ======= Skills Section ======= 
     <section id="skills" class="skills">
       <div class="container" data-aos="fade-up">
 
@@ -199,27 +199,38 @@
         </div>
 
       </div>
-    </section><!-- End Skills Section -->
+    </section> End Skills Section -->
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Services</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Seminar yang akan berlangsung</h2>
+          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
         </div>
 
         <div class="row">
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+        <?php $i = 1; ?>
+        @foreach ($pic_seminar as $row)
+
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-3" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              <div class="icon"><img src="{{ asset('assets/img/skills.png') }}" width="90%" align="center"></div>
+              <h4><a href="">{{ $row->nama_seminar }}</a></h4>
+              <p>
+                  <b>Tanggal:</b> {{ date('d-m-Y', strtotime($row->tanggal_seminar)) }} <br>
+                  <b>Lokasi:</b> {{ $row->lokasi_seminar }} <br>
+                  <b>Biaya:</b> {{ $row->gratis_berbayar }} <br>
+                  <b>Tanggal Pendaftaran Awal:<br></b> {{ date('d-m-Y', strtotime($row->tgl_pendaftaran_awal)) }} <br>
+                  <b>Tanggal Pendaftaran Akhir:<br></b> {{ date('d-m-Y', strtotime($row->tgl_pendaftaran_akhir)) }} <br>
+              </p>
+
             </div>
           </div>
+          <br>
 
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+          <!-- <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
               <h4><a href="">Sed ut perspici</a></h4>
@@ -245,11 +256,15 @@
 
         </div>
 
-      </div>
-    </section><!-- End Services Section -->
+      </div> -->
+      <?php $i++; ?>
+      @endforeach
+
+    </section>
+    <!-- End Services Section -->
 
     <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
+    <!-- <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
 
         <div class="row">
@@ -263,9 +278,9 @@
         </div>
 
       </div>
-    </section><!-- End Cta Section -->
+    </section> End Cta Section -->
 
-    <!-- ======= Portfolio Section ======= -->
+    <!-- ======= Portfolio Section ======= 
     <section id="portfolio" class="portfolio">
       <div class="container" data-aos="fade-up">
 
@@ -376,9 +391,9 @@
         </div>
 
       </div>
-    </section><!-- End Portfolio Section -->
+    </section> End Portfolio Section -->
 
-    <!-- ======= Team Section ======= -->
+    <!-- ======= Team Section ======= 
     <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
 
@@ -460,9 +475,9 @@
         </div>
 
       </div>
-    </section><!-- End Team Section -->
+    </section> End Team Section -->
 
-    <!-- ======= Pricing Section ======= -->
+    <!-- ======= Pricing Section ======= 
     <section id="pricing" class="pricing">
       <div class="container" data-aos="fade-up">
 
@@ -521,10 +536,10 @@
         </div>
 
       </div>
-    </section><!-- End Pricing Section -->
+    </section>End Pricing Section -->
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq section-bg">
+    <!-- <section id="faq" class="faq section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -583,10 +598,10 @@
         </div>
 
       </div>
-    </section><!-- End Frequently Asked Questions Section -->
+    </section>End Frequently Asked Questions Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    <!-- <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -653,5 +668,5 @@
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section>End Contact Section -->
     @endsection

@@ -1,4 +1,4 @@
-<header id="header" class="fixed-top ">
+<header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center">
 
       <h1 class="logo me-auto"><a href="index.html">SeminarKu</a></h1>

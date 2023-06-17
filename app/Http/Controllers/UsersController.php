@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use App\Models\PIC_Seminar;
 
 class UsersController extends Controller
 {
@@ -14,7 +16,21 @@ class UsersController extends Controller
     {
         // $datas = User::all();
         // return view('users', compact('datas'));
-        return view('dashboard.user');
+        $pic_seminar = PIC_Seminar::all();
+
+        return view('dashboard.users',['pic_seminar' => $pic_seminar]);
+
+    }
+
+    public function index_profile()
+    {
+        // $datas = User::all();
+        // return view('users', compact('datas'));
+        // $user = User::all();
+        $user = User::all()->where('id', 5)->first();
+
+        return view('profile.users',['user' => $user]);
+
     }
 
     /**

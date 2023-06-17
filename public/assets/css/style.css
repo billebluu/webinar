@@ -202,6 +202,24 @@ h6 {
   background: #31a9e1;
 }
 
+.navbar .search,
+.navbar .search:focus {
+  padding: 8px 20px;
+  margin-left: 5px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  border: 2px solid #47b2e4;
+  background-color: #37517e;
+  font-weight: 600;
+}
+
+.navbar .search:hover,
+.navbar .search:focus:hover {
+  color: #fff;
+  background: #31a9e1;
+}
+
 .navbar .dropdown ul {
   display: block;
   position: absolute;
