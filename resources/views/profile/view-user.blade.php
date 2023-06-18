@@ -27,7 +27,7 @@
 				<div class="card">
 					<div class="card-body">
 						<div>
-						<h4>Profile Saya <a href="{{ route('users.edit', $user->id) }}"><i class="bi bi-pencil"></i></a></h4>
+						<h4>Profile Saya <a href="{{ url('profil') }}"><i class="bi bi-pencil"></i></a></h4>
 						</div>
 						<div style="padding-top: 20px">
 							<table class="table">
@@ -43,14 +43,14 @@
 									<td class="my-td">Email</td>
 									<td class="my-td">:</td>
 									<td class="my-td">
-										<h5>{{ $user->email_user }}</h5>
+										<h5>{{  $user->email_user}}</h5>
 									</td>
 								</tr>
 								<tr class="my-tr">
 									<td class="my-td">Nomor Telepon</td>
 									<td class="my-td">:</td>
 									<td class="my-td">
-										<h5>{{ $user->no_telp }}</h5>
+										<h5>{{$user->no_telp}}</h5>
 
 									</td>
 								</tr>

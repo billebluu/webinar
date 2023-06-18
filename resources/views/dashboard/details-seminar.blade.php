@@ -31,13 +31,6 @@
             <img src="{{ asset('assets/img/skills.png') }}" width="90%" align="center" alt="">
             </div>
 
-            <!-- <div class="swiper-slide">
-              <img src="assets/img/portfolio/portfolio-2.jpg" alt="">
-            </div>
-
-            <div class="swiper-slide">
-              <img src="assets/img/portfolio/portfolio-3.jpg" alt="">
-            </div> -->
 
           </div>
           <div class="swiper-pagination"></div>

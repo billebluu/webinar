@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\PIC_Seminar;
+use Illuminate\Support\Facades\Auth;
+
 
 class UsersController extends Controller
 {
@@ -27,7 +29,7 @@ class UsersController extends Controller
         // $datas = User::all();
         // return view('users', compact('datas'));
         // $user = User::all();
-        $user = User::all()->where('id', 3)->first();
+        $user = DB::table('users')->where('id', auth()->user()->id)->first();
 
         return view('profile.view-user',['user' => $user]);
 
@@ -45,7 +47,7 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
         $model = new User;
         $model->password = 1;
@@ -63,7 +65,7 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -71,16 +73,16 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::find(3);
+        $user = User::where('id',auth()->user()->id)->post();
         return view('profile.edit-user', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,string $id)
     {
-        $model = User::find($id);
+        $model = User::where('id',auth()->user()->id)->post();
         $model->password = 1;
         $model->nama_user = $request->nama_user;
         $model->email_user = $request->email_user;
@@ -96,7 +98,7 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        $model = User::find($id);
+        $model = User::where('id',auth()->user()->id)->post();
         $model->delete();
         return redirect('users');
     }
@@ -112,6 +114,17 @@ class UsersController extends Controller
 
     public function edit_layout(){
         return view('users');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+     
+        $request->session()->invalidate();
+     
+        $request->session()->regenerateToken();
+     
+        return redirect('/login');
     }
 
 }

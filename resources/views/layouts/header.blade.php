@@ -7,18 +7,20 @@
 
       <nav id="navbar" class="navbar">
         <ul>
+          @auth
           <!-- <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li> -->
           <li>
-            <form action="" method="post" class="d-flex" role="search">
+            <form action="/dashboard" method="post" class="d-flex" role="search">
+              @csrf
                 <input class="form-control me-2" type="text" name="keyword" size="20" style="padding-right:50px"autofocus autocomplete="off" placeholder="Masukkan Keyword" aria-label="Search">
                 <button class="search" type="submit" name="search">Search</button>
             </form>
           </li>
           <li><a class="nav-link scrollto" href="{{url('dashboard')}}">Dashboard</a></li>
-          <li class="dropdown"><a href="#"><span>Pengguna</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a><span>{{ auth()->user()->nama_user }}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{url('profile')}}">Lihat Profil</a></li>
               <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -28,15 +30,22 @@
                   <li><a href="#">Deep Drop Down 3</a></li>
                   <li><a href="#">Deep Drop Down 4</a></li>
                   <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li> -->
-              <li><a href="#">Logout</a></li>
+                </ul>-->
+              </li>
+              <li>
+              <form action="/logout" method="post">
+                @csrf
+                
+                <button type="submit" class="btn btn-block btn-default " style="width=100%; outline: none;" > logout</button>
+                </form>
+              </li>
               <!-- <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li> -->
             </ul>
           </li>
           <!-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
+          @endauth
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
