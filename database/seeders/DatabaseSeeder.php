@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             PIC_SeminarSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

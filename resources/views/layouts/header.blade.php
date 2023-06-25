@@ -20,6 +20,7 @@
             </form>
           </li>
           <li><a class="nav-link scrollto" href="{{url('dashboard')}}">Dashboard</a></li>
+          <li><a class="nav-link scrollto" href="/request">Request Publish</a></li>
           <li class="dropdown"><a><span>{{ auth()->user()->nama_user }}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{url('profile')}}">Lihat Profil</a></li>
@@ -30,8 +31,7 @@
                   <li><a href="#">Deep Drop Down 3</a></li>
                   <li><a href="#">Deep Drop Down 4</a></li>
                   <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>-->
-              </li>
+                </ul></li>-->
               <li>
               <form action="/logout" method="post">
                 @csrf
