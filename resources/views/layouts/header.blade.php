@@ -36,7 +36,7 @@
               <form action="/logout" method="post">
                 @csrf
                 
-                <button type="submit" class="btn btn-block btn-default " style="width=100%; outline: none;" > logout</button>
+                <button type="submit" class="btn btn-block btn-default " style="width:100%"; outline: none;" > logout</button>
                 </form>
               </li>
               <!-- <li><a href="#">Drop Down 3</a></li>

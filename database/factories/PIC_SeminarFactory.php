@@ -29,11 +29,7 @@ class PIC_SeminarFactory extends Factory
             'tgl_pendaftaran_akhir' => fake()->date(),
             'setup_tgl_unduh' => fake()->date(),
             'sertifikat' => fake()->image(),
-            'ukuran_poster' => fake()->randomDigit(),
-            'nama_poster' => fake()->word(rand(8,15),true),
-            'ekstensi_poster' => $this->faker->randomElement(['png', 'jpg', 'jpeg']),
-            'poster' => fake()->image(),
-
+            'poster' => fake()->image()
         ];
     }
 }
