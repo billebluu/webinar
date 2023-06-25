@@ -88,6 +88,8 @@ class PIC_SeminarController extends Controller
         return view('dashboard.details-seminar',['seminar' => $seminar]);
     }
 
+    
+
     /**
      * Show the form for editing the specified resource.
      */

@@ -7,6 +7,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController;
 
 
 
@@ -45,3 +46,17 @@ Route::get('/pic-seminar/create-seminar', [PIC_SeminarController::class, 'create
 Route::post('/pic-seminar/store-seminar', [PIC_SeminarController::class, 'store_seminar']);
 Route::get('/pic-seminar/view-peserta-seminar', [PIC_SeminarController::class, 'view_peserta']);
 Route::get('/pic-seminar/sertifikat', [PIC_SeminarController::class, 'create_sertifikat']);
+//ADMIN
+Route::get('/dashboard-admin', [AdminController::class, 'index']);
+Route::get('/event-details', [AdminController::class, 'show_event'])->name('admin.event-details');
+Route::get('/event-approval-request', [AdminController::class, 'show_event_approval'])->name('admin.event-approval-request');
+Route::get('/user-details', [AdminController::class, 'show_user'])->name('admin.user-details');
+Route::get('/event-details/{id}', [AdminController::class, 'show_more_details'])->name('admin.more-details');
+Route::delete('/event-details/{seminar}', [AdminController::class, 'destroy_event'])->name('seminar.destroy');
+Route::delete('/user-details/{user}', [AdminController::class, 'destroy_user'])->name('user.destroy');
+
+
+
+// Route::get('/dashboard-admin', [AdminController::class, 'index']);
+// Route::get('/dashboard-admin', [AdminController::class, 'index']);
+
