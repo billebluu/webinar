@@ -40,6 +40,12 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 //Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
+// partnya billa
+Route::get('/pic-seminar', [PIC_SeminarController::class, 'index']);
+Route::get('/pic-seminar/create-seminar', [PIC_SeminarController::class, 'create_seminar']);
+Route::post('/pic-seminar/store-seminar', [PIC_SeminarController::class, 'store_seminar']);
+Route::get('/pic-seminar/view-peserta-seminar', [PIC_SeminarController::class, 'view_peserta']);
+Route::get('/pic-seminar/sertifikat', [PIC_SeminarController::class, 'create_sertifikat']);
 //ADMIN
 Route::get('/dashboard-admin', [AdminController::class, 'index']);
 Route::get('/event-details', [AdminController::class, 'show_event'])->name('admin.event-details');
