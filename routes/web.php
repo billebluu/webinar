@@ -54,3 +54,7 @@ Route::delete('/user-details/{user}', [AdminController::class, 'destroy_user'])-
 // Route::get('/dashboard-admin', [AdminController::class, 'index']);
 // Route::get('/dashboard-admin', [AdminController::class, 'index']);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

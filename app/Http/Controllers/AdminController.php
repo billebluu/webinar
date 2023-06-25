@@ -42,25 +42,47 @@ class AdminController extends Controller
         //
     }
 
-    public function show_event()
+    public function show_event(Request $request)
     {
-        $seminar = PIC_Seminar::all();
+        $keyword = $request->keyword;
 
-        return view('admin.event-details',['seminar' => $seminar]);
+        // $seminar = PIC_Seminar::all();
+        $seminar = PIC_Seminar::where('nama_seminar','LIKE', '%'.$keyword.'%')
+                    ->orWhere('tanggal_seminar','LIKE', '%'.$keyword.'%')
+                    ->orWhere('status','LIKE', '%'.$keyword.'%')
+                    ->paginate(10);
+        $seminar->withPath('event-details');
+        $seminar->appends($request->all());
+        return view('admin.event-details', compact('seminar','keyword'));
     }
 
-    public function show_event_approval()
+    public function show_event_approval(Request $request)
     {
-        $seminar = PIC_Seminar::all();
+        $keyword = $request->keyword;
 
-        return view('admin.event-approval-request',['seminar' => $seminar]);
+        // $seminar = PIC_Seminar::all();
+        $seminar = PIC_Seminar::where('nama_seminar','LIKE', '%'.$keyword.'%')
+                    ->orWhere('tanggal_seminar','LIKE', '%'.$keyword.'%')
+                    ->orWhere('status','LIKE', '%'.$keyword.'%')
+                    ->paginate(10);
+        $seminar->withPath('event-approval-request');
+        $seminar->appends($request->all());
+
+        return view('admin.event-approval-request',compact('seminar','keyword'));
     }
 
-    public function show_user()
+    public function show_user(Request $request)
     {
-        $user = User::all();
+        $keyword = $request->keyword;
 
-        return view('admin.user-details',['user' => $user]);
+        // $user = User::all();
+        $user = User::where('nama_user','LIKE', '%'.$keyword.'%')
+                    ->orWhere('email_user','LIKE', '%'.$keyword.'%')
+                    ->paginate(10);
+        $user->withPath('user-details');
+        $user->appends($request->all());
+
+        return view('admin.user-details',compact('user','keyword'));
     }
 
     public function show_more_details(string $id)
