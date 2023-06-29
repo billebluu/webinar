@@ -28,7 +28,8 @@ class PIC_Seminar extends Model
         'tgl_pendaftaran_akhir',
         'setup_tgl_unduh',
         'sertifikat',
-        'poster'
+        'poster', 
+        'status'
     ];
 
     /**

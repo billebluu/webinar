@@ -46,15 +46,19 @@ class AdminController extends Controller
     {
         $keyword = $request->keyword;
 
-        // $seminar = PIC_Seminar::all();
-        $seminar = PIC_Seminar::where('nama_seminar','LIKE', '%'.$keyword.'%')
-                    ->orWhere('tanggal_seminar','LIKE', '%'.$keyword.'%')
-                    ->orWhere('status','LIKE', '%'.$keyword.'%')
-                    ->paginate(10);
+        $seminar = PIC_Seminar::where(function ($query) use ($keyword) {
+            $query->where('nama_seminar', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('tanggal_seminar', 'LIKE', '%' . $keyword . '%');
+        })
+        ->where('status', 'accepted')
+        ->paginate(10);
+
         $seminar->withPath('event-details');
         $seminar->appends($request->all());
-        return view('admin.event-details', compact('seminar','keyword'));
+
+        return view('admin.event-details', compact('seminar', 'keyword'));
     }
+
 
     public function show_event_approval(Request $request)
     {
@@ -92,6 +96,28 @@ class AdminController extends Controller
         return view('admin.more-details',['seminar' => $seminar]);
     }
 
+    public function approve(Request $request, $id)
+    {
+        $seminar = PIC_Seminar::findOrFail($id);
+        $seminar->status = 'ACCEPTED';
+        $seminar->save();
+
+        // Tambahkan logika lain yang diperlukan
+
+        return redirect('event-approval-request')->with('success', 'Seminar berhasil diterima');
+    }
+
+    public function reject(Request $request, $id)
+    {
+        $seminar = PIC_Seminar::findOrFail($id);
+        $seminar->status = 'REJECTED';
+        $seminar->save();
+
+        // Tambahkan logika lain yang diperlukan
+
+        return redirect('event-approval-request')->with('success2', 'Seminar berhasil ditolak');
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -115,13 +141,14 @@ class AdminController extends Controller
     {
         User::findOrFail($id)->delete();
 
-        return redirect('user-details');
+        return redirect('user-details')->with('success', 'Data berhasil dihapus');
     }
 
     public function destroy_event(string $id)
     {
         PIC_Seminar::findOrFail($id)->delete();
-
-        return redirect('event-details');
+    
+        return redirect('event-details')->with('success', 'Data berhasil dihapus');
     }
+    
 }

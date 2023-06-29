@@ -3,6 +3,70 @@
 
     
     @section('container')
+
+    @if (Session::has('success'))
+        <!-- Modal Sukses Diterima -->
+        <div class="modal fade" id="validasiAcceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"><b>Event Berhasil Diterima!</b></div>
+                </div>
+            </div>
+        </div>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                $('#validasiAcceptModal').modal('show');
+                
+                // Menghapus sesi flash 'success' setelah beberapa saat
+                setTimeout(function() {
+                    $('#validasiAcceptModal').modal('hide');
+                    {{ Session::forget('success') }};
+                }, 1000000); // Menutup modal setelah 3 detik (3000 milidetik)
+                });
+
+            </script>  
+    @endif
+
+    @if (Session::has('success2'))
+        <!-- Modal Sukses Ditolak -->
+        <div class="modal fade" id="validasiRejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"><b>Event Berhasil Ditolak!</b></div>
+                </div>
+            </div>
+        </div>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                $('#validasiRejectModal').modal('show');
+                
+                // Menghapus sesi flash 'success' setelah beberapa saat
+                setTimeout(function() {
+                    $('#validasiRejectModal').modal('hide');
+                    {{ Session::forget('success') }};
+                }, 1000000); // Menutup modal setelah 3 detik (3000 milidetik)
+                });
+
+            </script>  
+    @endif
+
+
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -259,8 +323,38 @@
                         <td>{{ $value->tanggal_seminar }}</td>
                         <td>{{ $value->status }}</td>
                         <td><a class="btn btn-primary" href="{{ route('admin.more-details', $value->id) }}">DETAILS</a></td>
-                        <td><a class="btn btn-danger" href="{{url('admin-edit-user/'.$value->id.'/edit')}}">VALIDASI</a></td>
+                        <td>
+                            <?php if($value["status"]=='PENDING'):?>
+                                    <a class="btn btn-danger" data-toggle="modal" href="#"  data-target="#validasiModal<?= $value["id"]; ?>">VALIDASI</a> 
+                            <?php endif ?>
+                        </td>
                         
+                        <!-- Validasi Modal-->
+                        <div class="modal fade" id="validasiModal<?= $value["id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Yakin untuk validasi?</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Tekan tombol di bawah ini untuk melakukan validasi.</div>
+                                        <div class="modal-footer">
+                                        <form action="{{ route('approve', $value->id) }}" method="POST">
+                                            @csrf
+                                            <button class="btn btn-primary" type="submit">ACCEPT</button>
+                                        </form>                                            
+                                        <form action="{{ route('reject', $value->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger" type="submit">REJECT</button>
+                                            </form>                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </tr>
                         <?php $i++; ?>
                         @endforeach
@@ -275,6 +369,7 @@
 
 </div>
 <!-- End of Main Content -->
+
 
 
 @endsection

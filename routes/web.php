@@ -54,6 +54,8 @@ Route::get('/user-details', [AdminController::class, 'show_user'])->name('admin.
 Route::get('/event-details/{id}', [AdminController::class, 'show_more_details'])->name('admin.more-details');
 Route::delete('/event-details/{seminar}', [AdminController::class, 'destroy_event'])->name('seminar.destroy');
 Route::delete('/user-details/{user}', [AdminController::class, 'destroy_user'])->name('user.destroy');
+Route::post('/seminar/approve/{id}', [AdminController::class, 'approve'])->name('approve');
+Route::delete('/seminar/reject/{id}', [AdminController::class, 'reject'])->name('reject');
 
 
 
