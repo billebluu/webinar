@@ -280,9 +280,9 @@
                 </tfoot>
                 <tbody align="center">
                     <tr align="center">
-                    <?php $i = 1;?>
+                    <?php $i = 0;?>
                     @foreach($user as $key=>$value)
-                        <td>{{ $i }}</td>
+                        <td>{{ $user->firstItem() + $i }}</td>
                         <td>{{ $value->nama_user }}</td>
                         <td>{{ $value->email_user }}</td>
                         <td>
@@ -321,6 +321,19 @@
                         @endforeach
                 </tbody>
             </table>
+            <!-- Pagination -->
+            <div>
+                Showing
+                {{ $user->firstItem() }}
+                to
+                {{ $user->lastItem() }}
+                of
+                {{ $user->total() }}
+                entries
+            </div>
+            <div class="float-right">
+            {{ $user->links() }}
+            </div>
         </div>
     </div>
 </div>

@@ -315,9 +315,9 @@
                 </tfoot>
                 <tbody align="center">
                     <tr>
-                    <?php $i = 1;?>
+                    <?php $i = 0;?>
                     @foreach($seminar as $key=>$value)
-                        <td>{{ $i }}</td>
+                        <td>{{ $seminar->firstItem() + $i }}</td>
                         <td>{{ $value->nama_seminar }}</td>
                         <td>{{ $value->poster }}</td>
                         <td>{{ $value->tanggal_seminar }}</td>
@@ -360,6 +360,19 @@
                         @endforeach
                 </tbody>
             </table>
+            <!-- Pagination -->
+            <div>
+                Showing
+                {{ $seminar->firstItem() }}
+                to
+                {{ $seminar->lastItem() }}
+                of
+                {{ $seminar->total() }}
+                entries
+            </div>
+            <div class="float-right">
+            {{ $seminar->links() }}
+            </div>
         </div>
     </div>
 </div>
