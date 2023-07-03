@@ -116,6 +116,11 @@ class UsersController extends Controller
         return view('users');
     }
 
+    public function register_seminar(){
+        return view('pendaftaran');
+    }
+
+
     public function logout(Request $request)
     {
         Auth::logout();

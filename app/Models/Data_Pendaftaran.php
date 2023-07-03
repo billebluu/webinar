@@ -10,4 +10,14 @@ class Data_Pendaftaran extends Model
     use HasFactory;
     protected $table = "data_pendaftaran";
 
+    protected $fillable = [
+        'id_peserta',
+        'id_pic_seminar',
+        'no_identitas',
+        'tgl_pembayaran',
+        'bukti_pembayaran',
+        'sumber_info',
+        'status_peserta'
+        
+    ];
 }

@@ -2,7 +2,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+            
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -59,6 +59,16 @@
                     <i class="fas fa-fw fa-sign-out-alt"></i>
                     <span>Logout</span></a>
             </li>
+
+            @auth
+            @else
+            <!-- Nav Item - Login -->
+            <li class="nav-item">
+                <a class="nav-link" href="/login-admin">
+                    <i class="fas fa-fw fa-sign-in-alt"></i>
+                    <span>Login</span></a>
+            </li>
+            @endauth
 
             <!-- Nav Item - Pages Collapse Menu
             <li class="nav-item">

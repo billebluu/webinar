@@ -32,7 +32,7 @@ class PIC_SeminarFactory extends Factory
             'setup_tgl_unduh' => fake()->date(),
             'sertifikat' => fake()->image(),
             'poster' => fake()->image(),
-            'status' => $this->faker->randomElement(['ACCEPTED'])
+            'status' => $this->faker->randomElement(['PENDING'])
         ];
     }
 }
