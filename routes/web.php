@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PIC_SeminarController;
@@ -12,7 +13,7 @@ use App\Http\Controllers\AdminController;
 
 
 Route::get('/', [UsersController::class, 'index']);
-Route::get('/dashboard', [UsersController::class, 'index'])->middleware('auth');
+Route::get('/dashboard', [UsersController::class, 'index']);
 Route::get('/profile', [UsersController::class, 'index_profile']);
 // Route::get('/edit-user', [UsersController::class, 'index_profile']);
 Route::get('/profile/{id}/edit', [UsersController::class, 'edit'])->name('profile.edit-user');
@@ -34,7 +35,7 @@ Route::post('/logout', [UsersController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate']);
 // Route::post('/logout', [LoginController::class, 'logout']);
 
@@ -43,9 +44,15 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 // partnya billa
 Route::get('/pic-seminar', [PIC_SeminarController::class, 'index']);
 Route::get('/pic-seminar/create-seminar', [PIC_SeminarController::class, 'create_seminar']);
+Route::get('/pic-seminar/create-sertifikat/{id}', [PIC_SeminarController::class, 'create_sertifikat'])->name('pic-seminar.create-sertifikat');
+Route::get('/pic-seminar/create-pembicara', [PIC_SeminarController::class, 'create_pembicara']);
 Route::post('/pic-seminar/store-seminar', [PIC_SeminarController::class, 'store_seminar']);
-Route::get('/pic-seminar/view-peserta-seminar', [PIC_SeminarController::class, 'view_peserta']);
-Route::get('/pic-seminar/sertifikat', [PIC_SeminarController::class, 'create_sertifikat']);
+Route::post('/pic-seminar/store-pembicara', [PIC_SeminarController::class, 'store_pembicara']);
+Route::post('/pic-seminar/store-sertifikat', [PIC_SeminarController::class, 'store_sertifikat']);
+Route::get('/pic-seminar/view-peserta-seminar/{id}', [PIC_SeminarController::class, 'view_peserta'])->name('pic-seminar.view-peserta-seminar');
+Route::get('/pic-seminar/view-sertifikat/{id}', [PIC_SeminarController::class, 'view_sertifikat'])->name('pic-seminar.view-sertifikat');
+Route::post('/pic-seminar/search', [PIC_SeminarController::class, 'search']);
+
 //ADMIN
 Route::get('/dashboard-admin', [AdminController::class, 'index']);
 Route::get('/event-details', [AdminController::class, 'show_event'])->name('admin.event-details');
@@ -60,6 +67,10 @@ Route::delete('/user-details/{user}', [AdminController::class, 'destroy_user'])-
 // Route::get('/dashboard-admin', [AdminController::class, 'index']);
 // Route::get('/dashboard-admin', [AdminController::class, 'index']);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
