@@ -15,7 +15,7 @@ class PIC_SeminarSeeder extends Seeder
     public function run(): void
     {
         PIC_Seminar::factory()
-            ->count(5)
+            ->count(10)
             ->create();
     }
 }

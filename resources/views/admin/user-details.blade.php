@@ -3,6 +3,38 @@
 
     
     @section('container')
+
+    @if (Session::has('success'))
+        <!-- Modal Sukses Dihapus -->
+            <div class="modal fade" id="SuccessDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body"><b>Data Berhasil Dihapus!</b></div>
+                    </div>
+                </div>
+            </div>
+        
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                $('#SuccessDeleteModal').modal('show');
+                
+                // Menghapus sesi flash 'success' setelah beberapa saat
+                setTimeout(function() {
+                    $('#SuccessDeleteModal').modal('hide');
+                    {{ Session::forget('success') }};
+                }, 1000000); // Menutup modal setelah 3 detik (3000 milidetik)
+                });
+
+            </script>  
+    @endif
+
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -206,6 +238,29 @@
                         Logout
                     </a>
                 </div>
+                 <!-- Logout Modal-->
+                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                    <form action="/logout-admin" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">
+                                            Logout</button>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </li>
 
         </ul>
@@ -248,25 +303,60 @@
                 </tfoot>
                 <tbody align="center">
                     <tr align="center">
-                    <?php $i = 1;?>
+                    <?php $i = 0;?>
                     @foreach($user as $key=>$value)
-                        <td>{{ $i }}</td>
+                        <td>{{ $user->firstItem() + $i }}</td>
                         <td>{{ $value->nama_user }}</td>
                         <td>{{ $value->email_user }}</td>
                         <td>
-                            <form action="{{ route('user.destroy', ['user' => $value->id]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">
-                                DELETE
-                                </button>
-                            </form>                        
+                            <a class="btn btn-danger" data-toggle="modal"  href="#"  data-target="#deleteModal<?= $value["id"]; ?>">DELETE</a>                                        
                         </td>
-                    </tr>
+
+                        <!-- Delete Modal-->
+                        <div class="modal fade" id="deleteModal<?= $value["id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Yakin untuk hapus data?</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Tekan tombol di bawah ini untuk menghapus data.</div>
+                                        <div class="modal-footer">
+                                            <form action="{{ route('user.destroy', ['user' => $value->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">
+                                                        DELETE
+                                                    </button>
+                                            </form>
+                                            <!-- <button class="btn btn-primary" type="button" data-dismiss="modal">DELETE</button> -->
+                                            <a class="btn btn-secondary" type="button" data-dismiss="modal">CANCEL</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </tr>
                         <?php $i++; ?>
                         @endforeach
                 </tbody>
             </table>
+            <!-- Pagination -->
+            <div>
+                Showing
+                {{ $user->firstItem() }}
+                to
+                {{ $user->lastItem() }}
+                of
+                {{ $user->total() }}
+                entries
+            </div>
+            <div class="float-right">
+            {{ $user->links() }}
+            </div>
         </div>
     </div>
 </div>
@@ -276,6 +366,7 @@
 
 </div>
 <!-- End of Main Content -->
+
 
     
 

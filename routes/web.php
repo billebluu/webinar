@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PIC_SeminarController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\RegisterAdminController;
 
 
 
@@ -61,17 +64,26 @@ Route::get('/user-details', [AdminController::class, 'show_user'])->name('admin.
 Route::get('/event-details/{id}', [AdminController::class, 'show_more_details'])->name('admin.more-details');
 Route::delete('/event-details/{seminar}', [AdminController::class, 'destroy_event'])->name('seminar.destroy');
 Route::delete('/user-details/{user}', [AdminController::class, 'destroy_user'])->name('user.destroy');
-
+Route::post('/seminar/approve/{id}', [AdminController::class, 'approve'])->name('approve');
+Route::delete('/seminar/reject/{id}', [AdminController::class, 'reject'])->name('reject');
+Route::get('/login-admin',[LoginAdminController::class,'index'])->middleware('guest');
+Route::post('/login-admin',[LoginAdminController::class,'authenticate']);
+Route::get('/register-admin',[RegisterAdminController::class,'index'])->middleware('guest');
+Route::post('/register-admin',[RegisterAdminController::class,'store']);
+Route::post('/logout-admin',[LoginAdminController::class,'logout']);
 
 
 // Route::get('/dashboard-admin', [AdminController::class, 'index']);
 // Route::get('/dashboard-admin', [AdminController::class, 'index']);
 
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//daftar
+Route::get('/pendaftaran', [UsersController::class, 'register_seminar']);
+
+Route::post('/submitpendaftaran', [PendaftaranController::class,'insert']);

@@ -31,7 +31,8 @@ class PIC_SeminarFactory extends Factory
             'tgl_pendaftaran_akhir' => fake()->date(),
             'setup_tgl_unduh' => fake()->date(),
             'sertifikat' => fake()->image(),
-            'poster' => fake()->image()
+            'poster' => fake()->image(),
+            'status' => $this->faker->randomElement(['PENDING'])
         ];
     }
 }
