@@ -11,35 +11,51 @@
 
             <ol>
             <li><a href="{{url('dashboard')}}">Dashboard</a></li>        
-			<li><a href="{{url('pic-seminar')}}">List Seminar</a></li>
-            <li>Buat Seminar</li>
+			<li><a href="{{url('pic-seminar')}}">Buat Seminar</a></li>
+            <li>Buat Sertifikat</li>
             </ol>
-            <h2>Buat Seminar</h2>
+            <h2>Buat Sertifikat</h2>
 
         </div>
         </section><!-- End Breadcrumbs -->
 
         <section id="inner-page">   
-            <div class="container" style="padding: 0 200px;">
+            <div class="container" style="padding: 0 50px;">
                 <div class="card">
-                    <h3 class="text-center card-header">Informasi Seminar</h3>
-                    <form action="{{url('/pic-seminar/store-sertifikat')}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="card-text grid-item p-4">
-                            <div class="mb-3">
-                                <label for="nama_seminar" class="form-label">Judul Seminar</label>
-                                <input type="text" name="nama_seminar" class="form-control" id="nama_seminar" aria-describedby="nama_seminar">
-                            </div>
-                            <div class="mb-3">
-                                <label for="tanggal_seminar" class="form-label">Tanggal Pelaksanaan Seminar</label>
-                                <input type="date" name="tanggal_seminar" class="form-control" id="tanggal_seminar" aria-describedby="tanggal_seminar">
-                            </div>
-                            <button class="btn btn-primary mt-3" type="submit" name="submit">Submit</button>
+                    <h3 class="text-center card-header">Sertifikat</h3>
+                    <form action="{{ url('/pic-seminar/store-sertifikat') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $seminar->id }}">
+                    <div class="card-text grid-item p-4">
+                        <!-- Kode lainnya -->
+
+                        <div class="mb-3 form-group">
+                            <label for="sertifikat" class="form-label">Upload Template Sertifikat (.pdf)</label>
+                            <input type="file" name="sertifikat" value="{{ session('sertifikat') }}" class="form-control @error('sertifikat') is-invalid @enderror" id="sertifikat" aria-describedby="sertifikat">
+                            @error('sertifikat')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                    </form>
+
+                        <div class="mb-3 form-group">
+                            <label for="setup_tgl_unduh" class="form-label">Tanggal Pengiriman Sertifikat</label>
+                            <input type="date" name="setup_tgl_unduh" value="{{ session('setup_tgl_unduh') }}" class="form-control @error('setup_tgl_unduh') is-invalid @enderror" id="setup_tgl_unduh" aria-describedby="setup_tgl_unduh">
+                            <p class="px-2 py-2" style="font-size: 13px;">* Sertifikat akan dikirim ke email peserta dan dapat diakses oleh peserta pada tanggal yang Anda tetapkan</p>
+                            @error('setup_tgl_unduh')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <button class="btn btn-primary mt-1" type="submit">Submit</button>
+                    </div>
+                </form>
                 </div>
             </div>
         </section>
     </main><!-- End #main -->
 
-    @endsection
+    <!-- @endsection -->

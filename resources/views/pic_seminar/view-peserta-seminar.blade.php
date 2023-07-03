@@ -56,8 +56,10 @@
                     <!-- <tr>
                         <td colspan="4">Belum ada data.</td>
                     </tr> -->
+                    
+                    @foreach($peserta as $peserta)
                     <tr>
-                        <td>1</td>
+                        <td>{{ $peserta->nama_seminar }}</td>
                         <td>Jisoo</td>
                         <td>M0521001</td>
                         <td>081234567899</td>
