@@ -11,7 +11,7 @@
 
         <ol>
           <li><a href="{{url('dashboard')}}">Dashboard</a></li>
-          <li><a href="{{url('pic-seminar')}}">List Seminar  </a></li>
+          <li><a href="{{url('pic-seminar')}}">Seminar</a></li>
           <li>Lihat Peserta</li>
         </ol>
         <h2>Lihat Peserta</h2>
@@ -56,10 +56,13 @@
                     <!-- <tr>
                         <td colspan="4">Belum ada data.</td>
                     </tr> -->
-                    
+                    @php
+                      $no = 1;
+                    @endphp
+
                     @foreach($peserta as $peserta)
                     <tr>
-                        <td>{{ $peserta->nama_seminar }}</td>
+                        <td>{{ $no++ }}</td>
                         <td>Jisoo</td>
                         <td>M0521001</td>
                         <td>081234567899</td>

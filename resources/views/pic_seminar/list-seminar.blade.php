@@ -54,18 +54,18 @@
                     <div class="mb-4">
                         <h4>Daftar Seminar</h4>
                     </div>
-                    <div class="mb-4 d-inline-flex">
+                    <div class="mb-4 d-flex flex-row">
                         <form method="post" name="form1" action="{{ url('pic-seminar/search') }}">
                             @csrf
                             <div class="input-group">
-                            <input name="keyword" type="text" value="" class="form-control" aria-describedby="basic-addon2" placeholder="Pencarian " fdprocessedid="kz0w0f">
-                            <div class="input-group-append">
-                                <input type="submit" style="background-color: #e7e7e7" class="input-group-text btn-info" value="Cari" id="basic-addon2" fdprocessedid="twmf26">
-                            </div>
+                            <input name="keyword" type="text" value="" class="form-control" aria-describedby="basic-addon2" style="width: 274px;" placeholder="Kata Kunci" fdprocessedid="kz0w0f">
+                                <div class="input-group-append">
+                                    <input type="submit" style="background-color: #e7e7e7" class="input-group-text btn-info" value="Cari" id="basic-addon2" fdprocessedid="twmf26">
+                                </div>
                             </div>
                         </form>
                         <div align="right">
-                            <a href="{{ url('/pic-seminar/create-seminar') }}" class="btn btn-outline-primary ms-3" style="border-radius: 5px; border: 1px solid;">
+                            <a href="{{ url('/pic-seminar/create-seminar') }}" class="btn btn-primary ms-3" style="border-radius: 5px; border: 1px solid;">
                                 <strong> + Buat Seminar </strong>
                             </a>
                         </div>

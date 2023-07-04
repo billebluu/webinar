@@ -11,7 +11,7 @@
 
             <ol>
             <li><a href="{{url('dashboard')}}">Dashboard</a></li>        
-			<li><a href="{{url('pic-seminar')}}">Buat Seminar</a></li>
+			<li><a href="{{url('pic-seminar')}}">Seminar</a></li>
             <li>Buat Sertifikat</li>
             </ol>
             <h2>Buat Sertifikat</h2>
@@ -30,7 +30,7 @@
                         <!-- Kode lainnya -->
 
                         <div class="mb-3 form-group">
-                            <label for="sertifikat" class="form-label">Upload Template Sertifikat (.pdf)</label>
+                            <label for="sertifikat" class="form-label">Upload Template Sertifikat (.jpg, .jpeg, .png)</label>
                             <input type="file" name="sertifikat" value="{{ session('sertifikat') }}" class="form-control @error('sertifikat') is-invalid @enderror" id="sertifikat" aria-describedby="sertifikat">
                             @error('sertifikat')
                                 <div class="alert alert-danger mt-2">

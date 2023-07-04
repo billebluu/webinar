@@ -11,7 +11,7 @@
 
             <ol>
             <li><a href="{{url('dashboard')}}">Dashboard</a></li>        
-			<li><a href="{{url('pic-seminar')}}">List Seminar</a></li>
+			<li><a href="{{url('pic-seminar')}}">Seminar</a></li>
             <li>Buat Seminar</li>
             </ol>
             <h2>Buat Seminar</h2>
