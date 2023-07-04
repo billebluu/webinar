@@ -48,7 +48,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/pic-seminar', [PIC_SeminarController::class, 'index']);
 Route::get('/pic-seminar/create-seminar', [PIC_SeminarController::class, 'create_seminar']);
 Route::get('/pic-seminar/create-sertifikat/{id}', [PIC_SeminarController::class, 'create_sertifikat'])->name('pic-seminar.create-sertifikat');
-Route::get('/pic-seminar/create-pembicara', [PIC_SeminarController::class, 'create_pembicara']);
+Route::get('/pic-seminar/create-pembicara/{id}', [PIC_SeminarController::class, 'create_pembicara'])->name('pic-seminar.create-pembicara');
 Route::post('/pic-seminar/store-seminar', [PIC_SeminarController::class, 'store_seminar']);
 Route::post('/pic-seminar/store-pembicara', [PIC_SeminarController::class, 'store_pembicara']);
 Route::post('/pic-seminar/store-sertifikat', [PIC_SeminarController::class, 'store_sertifikat']);
