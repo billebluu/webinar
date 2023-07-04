@@ -31,8 +31,9 @@ class PIC_SeminarController extends Controller
         return view('pic_seminar.create-sertifikat', compact('seminar'));
     }
 
-    public function create_pembicara(){
-        return view('pic_seminar.create-pembicara');
+    public function create_pembicara($id){
+        $seminar = PIC_Seminar::find($id);
+        return view('pic_seminar.create-pembicara', compact('seminar'));
     }
 
     public function view_peserta($id){
@@ -43,6 +44,7 @@ class PIC_SeminarController extends Controller
     public function view_sertifikat($id){
         $seminar = PIC_Seminar::all()->where('id', $id);
         return view('pic_seminar.view-sertifikat',['seminar' => $seminar]);
+        // return view('pic_seminar.view-sertifikat');
     }
 
     /**
@@ -71,23 +73,11 @@ class PIC_SeminarController extends Controller
             $poster = $request->file('poster');
 
             if (!is_null($poster)) {
-                $posterPath = 'public/poster/' . uniqid() . '.' . $poster->getClientOriginalExtension();
-                $poster->storeAs('poster', $posterPath);
+                $posterPath = $poster->store('public/poster');
             }
         }
 
-        $sertifikatPath = null;
-
-        if ($request->hasFile('sertifikat')) {
-            $sertifikat = $request->file('sertifikat');
-
-            if (!is_null($sertifikat)) {
-                $sertifikatPath = 'public/sertifikat/' . uniqid() . '.' . $sertifikat->getClientOriginalExtension();
-                $sertifikat->storeAs('sertifikat', $sertifikatPath);
-            }
-        }
-
-        PIC_Seminar::create([
+        $seminar = PIC_Seminar::create([
             'id_user' => 3,
             'nama_seminar' => $request->nama_seminar,
             'deskripi_seminar' => $request->deskripi_seminar,
@@ -98,23 +88,22 @@ class PIC_SeminarController extends Controller
             'gratis_berbayar' => $request->gratis_berbayar,
             'tgl_pendaftaran_awal' => $request->tgl_pendaftaran_awal,
             'tgl_pendaftaran_akhir' => $request->tgl_pendaftaran_akhir,
-            'setup_tgl_unduh' => $request->tgl_pendaftaran_akhir,
-            'sertifikat' => $sertifikatPath,
             'poster' => $posterPath,
             'status' => 'pending'
         ]);
 
-        return redirect('/pic-seminar/create-pembicara');
+        return redirect('/pic-seminar/create-pembicara/'.$seminar->id);
     }
 
     public function store_pembicara(Request $request)
     {
 
         $this->validate($request, [
-            'nama_pembicara' => 'required',
-            'asal_instansi' => 'required',
-            'topik_pembicara' => 'required',
-            'materi_seminar' => 'required|mimes:pdf',
+            'id' => 'required',
+            'nama_pembicara.*' => 'required',
+            'asal_instansi.*' => 'required',
+            'topik_pembicara.*' => 'required',
+            'materi_seminar.*' => 'required|file|mimes:pdf,doc,docx',
         ]);
 
         $materiPath = null;
@@ -123,13 +112,12 @@ class PIC_SeminarController extends Controller
             $materi_seminar = $request->file('materi_seminar');
 
             if (!is_null($materi_seminar)) {
-                $materiPath = 'public/materi/' . uniqid() . '.' . $materi_seminar->getClientOriginalExtension();
-                $materi_seminar->storeAs('materi', $materiPath);
+                $materiPath = $materi_seminar->store('public/materi');
             }
         }
 
         Pembicara::create([
-            'id_pic_seminar' => 6,
+            'id_pic_seminar' => $request->id,
             'nama_pembicara' => $request->nama_pembicara,
             'asal_instansi' => $request->asal_instansi,
             'topik_pembicara' => $request->topik_pembicara,
@@ -144,7 +132,7 @@ class PIC_SeminarController extends Controller
 
         $this->validate($request, [
             'id' => 'required',
-            'sertifikat' => 'required|file|mimes:pdf',
+            'sertifikat' => 'required|image|mimes:jpg, jpeg, png',
             'setup_tgl_unduh' => 'required'
         ]);
 
@@ -154,8 +142,7 @@ class PIC_SeminarController extends Controller
             $sertifikat = $request->file('sertifikat');
 
             if (!is_null($sertifikat)) {
-                $sertifikatPath = 'public/materi/' . uniqid() . '.' . $sertifikat->getClientOriginalExtension();
-                $sertifikat->storeAs('materi', $sertifikatPath);
+                $sertifikatPath = $sertifikat->store('public/sertifikat');
             }
         }
 
@@ -189,7 +176,12 @@ class PIC_SeminarController extends Controller
         $keyword = $request->input('keyword');
 
         // Lakukan pencarian berdasarkan kata kunci
-        $seminar = PIC_Seminar::where('nama_seminar', 'LIKE', "%$keyword%")->get();
+        $seminar = PIC_Seminar::where('nama_seminar', 'LIKE', "%$keyword%")
+        ->orWhere('tanggal_seminar', 'LIKE', "%$keyword%")
+        ->orWhere('tanggal_seminar', 'LIKE', "%{$keyword}-%")
+        ->orWhere('tanggal_seminar', 'LIKE', "%-%{$keyword}-%")
+        ->orWhere('tanggal_seminar', 'LIKE', "%-%{$keyword}")
+        ->get();
 
         // return redirect('/pic-seminar');
         return view('pic_seminar.list-seminar', compact('seminar'));
