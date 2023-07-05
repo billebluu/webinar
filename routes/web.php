@@ -46,7 +46,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 // partnya billa
 Route::get('/pic-seminar', [PIC_SeminarController::class, 'index']);
-Route::get('/pic-seminar/create-seminar', [PIC_SeminarController::class, 'create_seminar']);
+Route::get('/pic-seminar/create-seminar', [PIC_SeminarController::class, 'create_seminar'])->name('pic-seminar.create-seminar');
 Route::get('/pic-seminar/create-sertifikat/{id}', [PIC_SeminarController::class, 'create_sertifikat'])->name('pic-seminar.create-sertifikat');
 Route::get('/pic-seminar/create-pembicara/{id}', [PIC_SeminarController::class, 'create_pembicara'])->name('pic-seminar.create-pembicara');
 Route::post('/pic-seminar/store-seminar', [PIC_SeminarController::class, 'store_seminar']);
@@ -55,6 +55,8 @@ Route::post('/pic-seminar/store-sertifikat', [PIC_SeminarController::class, 'sto
 Route::get('/pic-seminar/view-peserta-seminar/{id}', [PIC_SeminarController::class, 'view_peserta'])->name('pic-seminar.view-peserta-seminar');
 Route::get('/pic-seminar/view-sertifikat/{id}', [PIC_SeminarController::class, 'view_sertifikat'])->name('pic-seminar.view-sertifikat');
 Route::post('/pic-seminar/search', [PIC_SeminarController::class, 'search']);
+Route::get('/pic-seminar/edit-status-peserta/{id}', [PIC_SeminarController::class, 'edit_status_peserta'])->name('pic-seminar.edit-status-peserta');
+Route::post('/pic-seminar/store-status-peserta', [PIC_SeminarController::class, 'store_status_peserta']);
 
 //ADMIN
 Route::get('/dashboard-admin', [AdminController::class, 'index']);
