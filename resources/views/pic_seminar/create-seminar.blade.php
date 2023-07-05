@@ -29,7 +29,6 @@
                             <div class="mb-3 form-group">
                                 <label for="nama_seminar" class="form-label">Judul Seminar</label>
                                 <input type="text" name="nama_seminar" class="form-control @error('nama_seminar') is-invalid @enderror" id="nama_seminar" aria-describedby="nama_seminar">
-                                <!-- error message untuk nama_seminar -->
                                 @error('nama_seminar')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}

@@ -27,8 +27,6 @@
                     @csrf
                     <input type="hidden" name="id" value="{{ $seminar->id }}">
                     <div class="card-text grid-item p-4">
-                        <!-- Kode lainnya -->
-
                         <div class="mb-3 form-group">
                             <label for="sertifikat" class="form-label">Upload Template Sertifikat (.jpg, .jpeg, .png)</label>
                             <input type="file" name="sertifikat" value="{{ session('sertifikat') }}" class="form-control @error('sertifikat') is-invalid @enderror" id="sertifikat" aria-describedby="sertifikat">
