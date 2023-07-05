@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Data_Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\PIC_Seminar;
+use App\Models\User;
 use App\Models\Pembicara;
+use App\Models\Data_Pendaftaran;
 use App\Models\Users;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Auth;
 
 class PIC_SeminarController extends Controller
@@ -19,7 +21,7 @@ class PIC_SeminarController extends Controller
     {
         $seminar = PIC_Seminar::all()->where('id_user', 3);
         //$seminar = PIC_Seminar::all();
-        return view('pic_seminar.list-seminar',['seminar' => $seminar]);
+        return view('pic_seminar.list-seminar', compact('seminar'));
     }
 
     public function create_seminar(){
@@ -36,14 +38,24 @@ class PIC_SeminarController extends Controller
         return view('pic_seminar.create-pembicara', compact('seminar'));
     }
 
+    public function edit_status_peserta($id){
+        $peserta = Data_Pendaftaran::find($id);
+        return view('pic_seminar.edit-status-peserta', compact('peserta'));
+    }
+
     public function view_peserta($id){
-        $peserta = Data_Pendaftaran::all()->where('id_pic_seminar', $id);
-        return view('pic_seminar.list-seminar',['peserta' => $peserta]);
+        $seminar = PIC_Seminar::all()->where('id', $id);
+        $peserta = Data_Pendaftaran::where('id_pic_seminar', $id)->get();
+        $user = User::join('data_pendaftaran', 'users.id', '=', 'data_pendaftaran.id_users')
+        ->where('data_pendaftaran.id_pic_seminar', $id)
+        ->get();
+
+        return view('pic_seminar.view-peserta-seminar', ['seminar' => $seminar, 'peserta' => $peserta, 'users' => $user]);
     }
 
     public function view_sertifikat($id){
         $seminar = PIC_Seminar::all()->where('id', $id);
-        return view('pic_seminar.view-sertifikat',['seminar' => $seminar]);
+        return view('pic_seminar.view-sertifikat', compact('seminar'));
         // return view('pic_seminar.view-sertifikat');
     }
 
@@ -162,13 +174,38 @@ class PIC_SeminarController extends Controller
         }
     }
 
+    public function store_status_peserta(Request $request)
+    {
+
+        $this->validate($request, [
+            'id' => 'required',
+            'status_peserta' => 'required'
+        ]);
+
+        $id = $request->input('id');
+        $peserta = Data_Pendaftaran::find($id);
+
+        $id_pic_seminar = Data_Pendaftaran::where('id', $id)->pluck('id_pic_seminar')->first();
+        
+        if ($peserta) {
+            $peserta->status_peserta = $request->input('status_peserta');
+            $peserta->save();
+
+            // Tampilkan pesan sukses atau alihkan pengguna ke halaman lain
+            return redirect('/pic-seminar/view-peserta-seminar/'.$id_pic_seminar)->with('success', 'Status peserta berhasil diperbarui.');
+        } else {
+            // Tampilkan pesan error jika id seminar tidak ditemukan
+            return redirect('/pic-seminar/view-peserta-seminar/'.$id_pic_seminar)->with('error', 'Gagal memperbarui status peserta.');
+        }
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
         $seminar = PIC_Seminar::find($id);
-        return view('dashboard.details-seminar',['seminar' => $seminar]);
+        return view('dashboard.details-seminar', compact('seminar'));
     }
 
     public function search(Request $request)
