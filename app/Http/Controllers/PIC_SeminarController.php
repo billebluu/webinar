@@ -19,10 +19,19 @@ class PIC_SeminarController extends Controller
      */
     public function index()
     {
-        $seminar = PIC_Seminar::all()->where('id_user', 3);
-        //$seminar = PIC_Seminar::all();
-        return view('pic_seminar.list-seminar', compact('seminar'));
+        $seminars = PIC_Seminar::where('id_user', 3)->get();
+
+        $total_peserta = Data_Pendaftaran::count();
+        $total_seminar = $seminars->where('status', 'accepted')->count();
+
+        foreach ($seminars as $seminar) {
+            $jumlah_peserta = Data_Pendaftaran::where('id_pic_seminar', $seminar->id)->count();
+            $seminar->jumlah_peserta = $jumlah_peserta;
+        }
+
+        return view('pic_seminar.list-seminar', compact('seminars', 'total_peserta', 'total_seminar'));
     }
+
 
     public function create_seminar(){
         return view('pic_seminar.create-seminar');
