@@ -24,10 +24,10 @@
             <div class="row">
             <div class="col-md-6 mt-2">
                 <a href="#">
-                <div class="p-cb cb-text cb-active" style="padding: 10px 20px; border-radius:10px; background-image: linear-gradient(to right, rgb(1, 169, 172), rgb(1, 219, 223)); border: 0px; color: white;">
-                    <div style="font-size: 40px;" class="cb-title mt-2">0</div>
+                <div class="p-cb cb-text cb-active" style="padding: 10px 20px; border-radius:10px; background-image: linear-gradient(to right, rgb(1, 169, 172), rgb(1, 219, 223)); border: 0px; color: white;">  
+                    <div style="font-size: 40px;" class="cb-title mt-2">{{ $total_seminar }}</div>   
                     <div class="cb-content mt-3">
-                    <p style="color: white;">Rekap peserta dari semua seminar</p>
+                    <p style="color: white;">Rekap seminar yang dipublikasikan</p>
                     </div>
                 </div>
                 </a>
@@ -35,7 +35,7 @@
             <div class="col-md-6 mt-2">
                 <a href="#">
                 <div class="p-cb cb-text cb-active" style="padding: 10px 20px; border-radius:10px; background-image: linear-gradient(to right, rgb(13, 110, 253), rgb(13, 170, 253)); color: white; border: 0px">
-                    <div style="font-size: 40px;" class=" cb-title mt-2">0</div>
+                    <div style="font-size: 40px;" class=" cb-title mt-2">{{ $total_peserta }}</div>
                     <div class="cb-content mt-3">
                     <p style="color: white;">
                         Rekap peserta yang mendaftar di semua seminar
@@ -79,6 +79,7 @@
                                 <th>Judul Seminar</th>
                                 <th class="text-center">Tanggal Pelaksanaan</th>
                                 <th class="text-center">Jumlah Peserta</th>
+                                <th class="text-center">Status Validasi</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -87,11 +88,20 @@
                             <!-- <tr>
                                 <td colspan="4">Belum ada data.</td>
                             </tr> -->
-                            @foreach($seminar as $seminar)
+                            @foreach($seminars as $seminar)
                             <tr>
                                 <td>{{ $seminar->nama_seminar }}</td>
                                 <td class="text-center">{{ $seminar->tanggal_seminar }}</td>
-                                <td class="text-center">0</td>
+                                <td class="text-center">{{ $seminar->jumlah_peserta }}</td>
+                                @if ($seminar->status === 'pending')
+                                <td class="text-center">Mohon menunggu validasi</td>
+                                @elseif ($seminar->status === '' || $seminar->status === 'null')
+                                <td class="text-center">-</td>
+                                @elseif ($seminar->status === 'accepted')
+                                <td class="text-center" style="color: green;">Seminar Anda diterima <br> & dipublikasikan</td>
+                                @else ($seminar->status === 'rejected')
+                                <td class="text-center" style="color: red;">Seminar Anda ditolak</td>
+                                @endif
                                 <td class="text-center">
                                 <a href="{{ url('pic-seminar/view-peserta-seminar/'.$seminar->id) }}"><button class="btn btn-outline-dark mx-2" style="border-radius:20px" type="button" value="Peserta">Peserta</button></a>
                                 @if ($seminar->sertifikat !== null && $seminar->setup_tgl_unduh !== null)

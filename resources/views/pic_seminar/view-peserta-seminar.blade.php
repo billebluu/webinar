@@ -22,8 +22,8 @@
     <section id="inner-page">
       <div class="container" style="background-color: #f3f5fa; border-radius: 50px;">
         <div class="p-4">
-          <h3 class="m-2" style="color:#37517e;">Informasi Seminar</h3>
-          <table class="m-2">
+          <h3 style="color:#37517e;">Informasi Seminar</h3>
+          <table>
             @foreach($seminar as $seminar)
               <tr>
                   <th style="padding-right:50px;">Judul</th>
@@ -40,12 +40,12 @@
 
       <div class="container">
         <div class="mt-4 p-4">
-          <h3 class="m-2" style="color:#37517e;">Peserta Seminar</h3>
+          <h3 class="" style="color:#37517e;">Peserta Seminar</h3>
           <div class="table-responsive mt-4">
               <table class="table table-hover">
                   <thead class="sticky-top">
                       <tr class="text-start table-primary">
-                          <th>Nomor</th>
+                          <th>No.</th>
                           <th>Nama Lengkap</th>
                           <th>Asal Instansi</th>
                           <th>Email</th>
