@@ -38,13 +38,13 @@
         </div>
       </div>
 
-      <div class="container" style="background-color: #f3f5fa; border-radius: 50px;">
+      <div class="container">
         <div class="mt-4 p-4">
           <h3 class="m-2" style="color:#37517e;">Peserta Seminar</h3>
           <div class="table-responsive mt-4">
               <table class="table table-hover">
                   <thead class="sticky-top">
-                      <tr class="text-start">
+                      <tr class="text-start table-primary">
                           <th>Nomor</th>
                           <th>Nama Lengkap</th>
                           <th>Asal Instansi</th>
@@ -76,7 +76,7 @@
                                   <td>{{ $user->no_identitas }}</td>
                                   <td>{{ $user->sumber_info }}</td>
                                   <td>
-                                    <a href="{{ Storage::url('poster/YFgih8yrsEnZfj9oQcoCA3tG2hhKgLiSSHpw9P58.jpg') }}" target="_blank" style="color:black; text-decoration:underline;">Lihat</a>
+                                    <a href="{{ Storage::url('poster/YFgih8yrsEnZfj9oQcoCA3tG2hhKgLiSSHpw9P58.jpg') }}" target="_blank" style="color:black; text-decoration:underline;"><button class="btn btn-outline-dark" style="border-radius: 20px;">Lihat</button></a>
                                   </td>
                                   <td>{{ $user->tgl_pembayaran }}</td>
                                   <td>{{ $user->status_peserta }}<a href="{{ url('/pic-seminar/edit-status-peserta/'.$user->id) }}"><i class="ps-2 bi bi-pencil"></i></a></td>
