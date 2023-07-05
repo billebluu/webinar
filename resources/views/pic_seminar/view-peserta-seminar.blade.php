@@ -66,7 +66,7 @@
                         $no = 1;
                       @endphp
 
-                      @foreach($users as $user)
+                      @forelse($users as $user)
                               <tr class="text-start">
                                   <td>{{ $no++ }}</td>
                                   <td>{{ $user->nama_user }}</td>
@@ -81,7 +81,11 @@
                                   <td>{{ $user->tgl_pembayaran }}</td>
                                   <td>{{ $user->status_peserta }}<a href="{{ url('/pic-seminar/edit-status-peserta/'.$user->id) }}"><i class="ps-2 bi bi-pencil"></i></a></td>
                               </tr>
-                      @endforeach
+                        @empty
+                              <tr>
+                                  <td colspan="10" class="text-center">Belum ada data.</td>
+                              </tr>
+                      @endforelse
                   </tbody>
               </table>
           </div>

@@ -86,9 +86,9 @@
 
                             <tbody>
                             <!-- <tr>
-                                <td colspan="4">Belum ada data.</td>
+                                <td colspan="5">Belum ada data.</td>
                             </tr> -->
-                            @foreach($seminars as $seminar)
+                            @forelse($seminars as $seminar)
                             <tr>
                                 <td>{{ $seminar->nama_seminar }}</td>
                                 <td class="text-center">{{ $seminar->tanggal_seminar }}</td>
@@ -115,7 +115,11 @@
                                 @endif
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center">Belum ada data.</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                         <div></div>
