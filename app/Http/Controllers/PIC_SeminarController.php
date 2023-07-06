@@ -21,15 +21,18 @@ class PIC_SeminarController extends Controller
     {
         $seminars = PIC_Seminar::where('id_user', 3)->get();
 
-        $total_peserta = Data_Pendaftaran::count();
-        $total_seminar = $seminars->where('status', 'accepted')->count();
+        $id_pic = $seminars->pluck('id')->toArray();
+        $rekap_peserta = Data_Pendaftaran::whereIn('id_pic_seminar', $id_pic)->count();
+        $rekap_seminar = $seminars->where('status', 'accepted')->count();
 
         foreach ($seminars as $seminar) {
-            $jumlah_peserta = Data_Pendaftaran::where('id_pic_seminar', $seminar->id)->count();
+            $id = $seminar->id;
+            $jumlah_peserta = Data_Pendaftaran::where('id_pic_seminar', $id)->count();
+
             $seminar->jumlah_peserta = $jumlah_peserta;
         }
 
-        return view('pic_seminar.list-seminar', compact('seminars', 'total_peserta', 'total_seminar'));
+        return view('pic_seminar.list-seminar', compact('seminars', 'rekap_peserta', 'rekap_seminar'));
     }
 
 
@@ -222,17 +225,34 @@ class PIC_SeminarController extends Controller
         $keyword = $request->input('keyword');
 
         // Lakukan pencarian berdasarkan kata kunci
-        $seminar = PIC_Seminar::where('nama_seminar', 'LIKE', "%$keyword%")
-        ->orWhere('tanggal_seminar', 'LIKE', "%$keyword%")
-        ->orWhere('tanggal_seminar', 'LIKE', "%{$keyword}-%")
-        ->orWhere('tanggal_seminar', 'LIKE', "%-%{$keyword}-%")
-        ->orWhere('tanggal_seminar', 'LIKE', "%-%{$keyword}")
-        ->get();
+        $seminars = PIC_Seminar::where('id_user', 3)
+            ->where(function ($query) use ($keyword) {
+                $query->where('nama_seminar', 'LIKE', "%$keyword%")
+                    ->orWhere('tanggal_seminar', 'LIKE', "%$keyword%")
+                    ->orWhere('tanggal_seminar', 'LIKE', "%{$keyword}-%")
+                    ->orWhere('tanggal_seminar', 'LIKE', "%-%{$keyword}-%")
+                    ->orWhere('tanggal_seminar', 'LIKE', "%-%{$keyword}");
+            })
+            ->get();
 
-        // return redirect('/pic-seminar');
-        return view('pic_seminar.list-seminar', compact('seminar'));
+        $id_pic = PIC_Seminar::where('id_user', 3)->pluck('id')->toArray();
+        $rekap_peserta = Data_Pendaftaran::whereIn('id_pic_seminar', $id_pic)->count();            
+
+        $rekap_seminar = PIC_Seminar::where('id_user', 3)
+            ->where('status', 'accepted')
+            ->count();
+
+        foreach ($seminars as $seminar) {
+            $id = $seminar->id;
+            $jumlah_peserta = Data_Pendaftaran::where('id_pic_seminar', $id)->count();
+
+            $seminar->jumlah_peserta = $jumlah_peserta;
+        }
+
+        $compactVariables = compact('seminars', 'rekap_peserta', 'rekap_seminar');
+
+        return view('pic_seminar.list-seminar', $compactVariables);
     }
-
 
     /**
      * Show the form for editing the specified resource.
