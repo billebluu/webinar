@@ -11,6 +11,7 @@ use App\Models\Data_Pendaftaran;
 use App\Models\Users;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PIC_SeminarController extends Controller
 {
@@ -52,9 +53,19 @@ class PIC_SeminarController extends Controller
         return view('pic_seminar.create-pembicara', compact('seminar'));
     }
 
+    public function upload_ulang_materi($id){
+        $pembicara = Pembicara::find($id);
+        return view('pic_seminar.upload-ulang-materi', compact('pembicara'));
+    }
+
     public function edit_status_peserta($id){
         $peserta = Data_Pendaftaran::find($id);
         return view('pic_seminar.edit-status-peserta', compact('peserta'));
+    }
+
+    public function edit_pembicara($id){
+        $pembicara = Pembicara::find($id);
+        return view('pic_seminar.edit-pembicara', compact('pembicara'));
     }
 
     public function view_peserta($id){
@@ -65,6 +76,12 @@ class PIC_SeminarController extends Controller
         ->get();
 
         return view('pic_seminar.view-peserta-seminar', ['seminar' => $seminar, 'peserta' => $peserta, 'users' => $user]);
+    }
+    
+    public function view_pembicara($id){
+        $pembicaras = Pembicara::where('id_pic_seminar', $id)->get();
+
+        return view('pic_seminar.view-pembicara', compact('pembicaras'));
     }
 
     public function view_sertifikat($id){
@@ -123,39 +140,37 @@ class PIC_SeminarController extends Controller
 
     public function store_pembicara(Request $request)
     {
-
         $this->validate($request, [
             'id' => 'required',
-            'nama_pembicara.*' => 'required',
-            'asal_instansi.*' => 'required',
-            'topik_pembicara.*' => 'required',
-            'materi_seminar.*' => 'required|file|mimes:pdf,doc,docx',
+            'nama_pembicara' => 'required',
+            'asal_instansi' => 'required',
+            'topik_pembicara' => 'required',
+            'materi_seminar' => 'required|file|mimes:pdf,doc,docx',
         ]);
 
-        $materiPath = null;
+        $id = $request->input('id');
+        $id_pic_seminar = null;
 
         if ($request->hasFile('materi_seminar')) {
             $materi_seminar = $request->file('materi_seminar');
+            $materiPath = $materi_seminar->store('public/materi');
 
-            if (!is_null($materi_seminar)) {
-                $materiPath = $materi_seminar->store('public/materi');
-            }
+            $pembicara = new Pembicara();
+            $pembicara->id_pic_seminar = $id;
+            $pembicara->nama_pembicara = $request->nama_pembicara;
+            $pembicara->asal_instansi = $request->asal_instansi;
+            $pembicara->topik_pembicara = $request->topik_pembicara;
+            $pembicara->materi_seminar = $materiPath;
+            $pembicara->save();
+
+            $id_pic_seminar = $id;
         }
 
-        Pembicara::create([
-            'id_pic_seminar' => $request->id,
-            'nama_pembicara' => $request->nama_pembicara,
-            'asal_instansi' => $request->asal_instansi,
-            'topik_pembicara' => $request->topik_pembicara,
-            'materi_seminar' => $materiPath
-        ]);
-
-        return redirect('/pic-seminar');
+        return redirect('/pic-seminar/view-pembicara/'.$id_pic_seminar);
     }
 
     public function store_sertifikat(Request $request)
     {
-
         $this->validate($request, [
             'id' => 'required',
             'sertifikat' => 'required|image|mimes:jpg, jpeg, png',
@@ -213,6 +228,67 @@ class PIC_SeminarController extends Controller
         }
     }
 
+    public function store_pembicara_edited(Request $request)
+    {
+
+        $this->validate($request, [
+            'id' => 'required',
+            'nama_pembicara' => 'required',
+            'asal_instansi' => 'required',
+            'nama_pembicara' => 'required'
+        ]);
+
+        $id = $request->input('id');
+        $pembicara = Pembicara::find($id);
+
+        $id_pic_seminar = Pembicara::where('id', $id)->pluck('id_pic_seminar')->first();
+        
+        if ($pembicara) {
+            $pembicara->nama_pembicara = $request->input('nama_pembicara');
+            $pembicara->asal_instansi = $request->input('asal_instansi');
+            $pembicara->topik_pembicara = $request->input('topik_pembicara');
+            $pembicara->save();
+
+            // Tampilkan pesan sukses atau alihkan pengguna ke halaman lain
+            return redirect('/pic-seminar/view-pembicara/'.$id_pic_seminar)->with('success', 'Status peserta berhasil diperbarui.');
+        } else {
+            // Tampilkan pesan error jika id seminar tidak ditemukan
+            return redirect('/pic-seminar/view-pembicara/'.$id_pic_seminar)->with('error', 'Gagal memperbarui status peserta.');
+        }
+    }
+
+    public function store_ulang_materi(Request $request)
+    {
+
+        $this->validate($request, [
+            'materi_seminar' => 'required|file|mimes:pdf, doc, docx'
+        ]);
+
+        $id = $request->input('id');
+        $pembicara = Pembicara::find($id);
+
+        $id_pic_seminar = Pembicara::where('id', $id)->pluck('id_pic_seminar')->first();
+
+        if ($request->hasFile('materi_seminar')) {
+            $materi_seminar = $request->file('materi_seminar');
+
+            if (!is_null($materi_seminar)) {
+                $materiPath = $materi_seminar->store('public/materi');
+            }
+        }
+        
+        if ($pembicara) {
+            $pembicara->materi_seminar = $materiPath;
+            $pembicara->save();
+
+            // Tampilkan pesan sukses atau alihkan pengguna ke halaman lain
+            return redirect('/pic-seminar/view-pembicara/'.$id_pic_seminar)->with('success', 'Status peserta berhasil diperbarui.');
+        } else {
+            // Tampilkan pesan error jika id seminar tidak ditemukan
+            return redirect('/pic-seminar/view-pembicara/'.$id_pic_seminar)->with('error', 'Gagal memperbarui status peserta.');
+        }
+    }
+
     /**
      * Display the specified resource.
      */
@@ -257,6 +333,21 @@ class PIC_SeminarController extends Controller
         $compactVariables = compact('seminars', 'rekap_peserta', 'rekap_seminar');
 
         return view('pic_seminar.list-seminar', $compactVariables);
+    }
+
+    public function delete_pembicara($id)
+    {
+        $pembicara = Pembicara::findOrFail($id);
+
+        // Hapus file materi seminar jika ada
+        if ($pembicara->materi_seminar) {
+            Storage::delete('materi/'.$pembicara->materi_seminar);
+        }
+
+        // Hapus data pembicara
+        $pembicara->delete();
+
+        return redirect()->back()->with('message', 'Data pembicara berhasil dihapus.');
     }
 
     /**
