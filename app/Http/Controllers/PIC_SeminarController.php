@@ -28,8 +28,10 @@ class PIC_SeminarController extends Controller
         foreach ($seminars as $seminar) {
             $id = $seminar->id;
             $jumlah_peserta = Data_Pendaftaran::where('id_pic_seminar', $id)->count();
+            $pembicara = Pembicara::where('id_pic_seminar', $id)->get();
 
             $seminar->jumlah_peserta = $jumlah_peserta;
+            $seminar->pembicara = $pembicara;
         }
 
         return view('pic_seminar.list-seminar', compact('seminars', 'rekap_peserta', 'rekap_seminar'));
@@ -101,7 +103,7 @@ class PIC_SeminarController extends Controller
             }
         }
 
-        $seminar = PIC_Seminar::create([
+        PIC_Seminar::create([
             'id_user' => 3,
             'nama_seminar' => $request->nama_seminar,
             'deskripi_seminar' => $request->deskripi_seminar,
@@ -116,7 +118,7 @@ class PIC_SeminarController extends Controller
             'status' => 'pending'
         ]);
 
-        return redirect('/pic-seminar/create-pembicara/'.$seminar->id);
+        return redirect('/pic-seminar');
     }
 
     public function store_pembicara(Request $request)
@@ -236,6 +238,7 @@ class PIC_SeminarController extends Controller
             ->get();
 
         $id_pic = PIC_Seminar::where('id_user', 3)->pluck('id')->toArray();
+
         $rekap_peserta = Data_Pendaftaran::whereIn('id_pic_seminar', $id_pic)->count();            
 
         $rekap_seminar = PIC_Seminar::where('id_user', 3)
@@ -245,8 +248,10 @@ class PIC_SeminarController extends Controller
         foreach ($seminars as $seminar) {
             $id = $seminar->id;
             $jumlah_peserta = Data_Pendaftaran::where('id_pic_seminar', $id)->count();
+            $pembicara = Pembicara::where('id_pic_seminar', $id)->get();
 
             $seminar->jumlah_peserta = $jumlah_peserta;
+            $seminar->pembicara = $pembicara;
         }
 
         $compactVariables = compact('seminars', 'rekap_peserta', 'rekap_seminar');
