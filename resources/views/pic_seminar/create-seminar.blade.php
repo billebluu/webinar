@@ -119,59 +119,10 @@
                                     </div>
                                 @enderror
                             </div>
-                            
-                            <!-- <div class="mb-3 form-group">
-                                <input type="hidden" name="sertifikat" value="{{ session('sertifikat') }}" class="form-control @error('sertifikat') is-invalid @enderror" id="sertifikat" aria-describedby="sertifikat">
-                                @error('sertifikat')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3 form-group">
-                                <input type="hidden" name="setup_tgl_unduh" value="{{ session('setup_tgl_unduh') }}" class="form-control @error('setup_tgl_unduh') is-invalid @enderror" id="setup_tgl_unduh" aria-describedby="setup_tgl_unduh">
-                                @error('setup_tgl_unduh')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> -->
-
                             <button class="btn btn-primary mt-3" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>
-
-                <!-- <div class="card mt-3">
-                <h3 class="text-center card-header">Informasi Pembicara</h3>
-                <div class="card-text grid-item p-4">
-                    <div class="mb-3">
-                    <label for="nama_pembicara" class="form-label">Nama Pembicara</label>
-                    <input type="text" class="form-control" id="nama_pembicara" aria-describedby="nama_pembicara">
-                    </div>
-                    <div class="mb-3">
-                    <label for="asal_intansi" class="form-label">Asal Instansi</label>
-                    <input type="text" class="form-control" id="asal_intansi" aria-describedby="asal_intansi">
-                    </div>
-                    <div class="mb-3">
-                    <label for="topik_pembicara" class="form-label">Topik</label>
-                    <input type="text" class="form-control" id="topik_pembicara" aria-describedby="topik_pembicara">
-                    </div>
-                    <div class="mb-3">
-                    <label for="materi_seminar" class="form-label">File Materi</label>
-                    <input type="file" class="form-control" id="materi_seminar" aria-describedby="materi_seminar">
-                    </div>
-                    <div id="form-tambahan"></div>
-                    <div align="right" style="padding-bottom: 10px;">
-                    <a class="btn btn-light" style="border-radius: 20px; border: 1px solid green;" onclick="tambahForm()">
-                        <span class="fa fa-plus"></span>
-                        <strong> + Tambah Pembicara </strong>
-                    </a>
-                    </div>
-                </div>
-                </div>
-                </form> -->
             </div>
         </section>
     </main><!-- End #main -->

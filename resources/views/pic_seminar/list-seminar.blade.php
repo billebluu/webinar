@@ -76,6 +76,7 @@
                                         <tr class="text-start">
                                             <th>Judul Seminar</th>
                                             <th class="text-center">Tanggal Pelaksanaan</th>
+                                            <th class="text-center">Nama Pembicara</th>
                                             <th class="text-center">Jumlah Peserta</th>
                                             <th class="text-center">Status Validasi</th>
                                             <th class="text-center">Action</th>
@@ -87,6 +88,13 @@
                                             <tr>
                                                 <td>{{ $seminar->nama_seminar }}</td>
                                                 <td class="text-center">{{ $seminar->tanggal_seminar }}</td>
+                                                <td class="text-start">
+                                                    <ol>
+                                                        @foreach ($seminar->pembicara as $pembicara)
+                                                            <li>{{ $pembicara->nama_pembicara }}</li>
+                                                        @endforeach
+                                                    </ol>
+                                                </td>
                                                 <td class="text-center">{{ $seminar->jumlah_peserta }}</td>
                                                 @if ($seminar->status === 'pending')
                                                 <td class="text-center">Mohon menunggu validasi</td>
@@ -98,16 +106,19 @@
                                                 <td class="text-center" style="color: red;">Seminar Anda ditolak</td>
                                                 @endif
                                                 <td class="text-center">
-                                                <a href="{{ url('pic-seminar/view-peserta-seminar/'.$seminar->id) }}"><button class="btn btn-outline-dark mx-2" style="border-radius:20px" type="button" value="Peserta">Peserta</button></a>
+                                                <a href="{{ url('pic-seminar/view-peserta-seminar/'.$seminar->id) }}"><button class="btn btn-outline-dark mx-1 my-1" style="border-radius:20px" type="button" value="Peserta">Peserta</button></a>
                                                 @if ($seminar->sertifikat !== null && $seminar->setup_tgl_unduh !== null)
                                                         <a href="{{ url('/pic-seminar/view-sertifikat/'.$seminar->id) }}">
-                                                            <button class="btn btn-outline-dark" style="border-radius:20px" type="button" value="Sertifikat">Sertifikat</button>
+                                                            <button class="btn btn-outline-dark mx-1 my-1" style="border-radius:20px" type="button" value="Sertifikat">Sertifikat</button>
                                                         </a>
                                                     @else
                                                         <a href="{{ url('/pic-seminar/create-sertifikat/'.$seminar->id) }}">
-                                                            <button class="btn btn-outline-dark" style="border-radius:20px" type="button" value="Sertifikat">Sertifikat</button>
+                                                            <button class="btn btn-outline-dark mx-1 my-1" style="border-radius:20px" type="button" value="Sertifikat">Sertifikat</button>
                                                         </a>
                                                 @endif
+                                                <a href="{{ url('/pic-seminar/create-pembicara/'.$seminar->id) }}">
+                                                    <button class="btn btn-outline-dark mx-1 my-1" style="border-radius:20px" type="button" value="Sertifikat">+ Pembicara</button>
+                                                </a>
                                                 </td>
                                             </tr>
                                         @empty
