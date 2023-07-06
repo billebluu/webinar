@@ -51,12 +51,18 @@ Route::get('/pic-seminar/create-sertifikat/{id}', [PIC_SeminarController::class,
 Route::get('/pic-seminar/create-pembicara/{id}', [PIC_SeminarController::class, 'create_pembicara'])->name('pic-seminar.create-pembicara');
 Route::post('/pic-seminar/store-seminar', [PIC_SeminarController::class, 'store_seminar']);
 Route::post('/pic-seminar/store-pembicara', [PIC_SeminarController::class, 'store_pembicara']);
+Route::post('/pic-seminar/store-pembicara-edited', [PIC_SeminarController::class, 'store_pembicara_edited']);
 Route::post('/pic-seminar/store-sertifikat', [PIC_SeminarController::class, 'store_sertifikat']);
+Route::get('/pic-seminar/view-pembicara/{id}', [PIC_SeminarController::class, 'view_pembicara'])->name('pic-seminar.view-pembicara');
 Route::get('/pic-seminar/view-peserta-seminar/{id}', [PIC_SeminarController::class, 'view_peserta'])->name('pic-seminar.view-peserta-seminar');
 Route::get('/pic-seminar/view-sertifikat/{id}', [PIC_SeminarController::class, 'view_sertifikat'])->name('pic-seminar.view-sertifikat');
 Route::post('/pic-seminar/search', [PIC_SeminarController::class, 'search']);
 Route::get('/pic-seminar/edit-status-peserta/{id}', [PIC_SeminarController::class, 'edit_status_peserta'])->name('pic-seminar.edit-status-peserta');
+Route::get('/pic-seminar/edit-pembicara/{id}', [PIC_SeminarController::class, 'edit_pembicara'])->name('pic-seminar.edit-pembicara');
+Route::get('/pic-seminar/upload-ulang-materi/{id}', [PIC_SeminarController::class, 'upload_ulang_materi'])->name('pic-seminar.upload-ulang-materi');
 Route::post('/pic-seminar/store-status-peserta', [PIC_SeminarController::class, 'store_status_peserta']);
+Route::post('/pic-seminar/store-ulang-materi', [PIC_SeminarController::class, 'store_ulang_materi']);
+Route::delete('/pic-seminar/delete-pembicara/{id}', [PIC_SeminarController::class, 'delete_pembicara'])->name('pembicara.delete');
 
 //ADMIN
 Route::get('/dashboard-admin', [AdminController::class, 'index']);
