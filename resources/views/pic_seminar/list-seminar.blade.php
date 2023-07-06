@@ -76,7 +76,7 @@
                                         <tr class="text-start">
                                             <th>Judul Seminar</th>
                                             <th class="text-center">Tanggal Pelaksanaan</th>
-                                            <th class="text-center">Nama Pembicara</th>
+                                            <th class="text-center">Pembicara</th>
                                             <th class="text-center">Jumlah Peserta</th>
                                             <th class="text-center">Status Validasi</th>
                                             <th class="text-center">Action</th>
@@ -116,14 +116,14 @@
                                                             <button class="btn btn-outline-dark mx-1 my-1" style="border-radius:20px" type="button" value="Sertifikat">Sertifikat</button>
                                                         </a>
                                                 @endif
-                                                <a href="{{ url('/pic-seminar/create-pembicara/'.$seminar->id) }}">
-                                                    <button class="btn btn-outline-dark mx-1 my-1" style="border-radius:20px" type="button" value="Sertifikat">+ Pembicara</button>
-                                                </a>
+                                                    <a href="{{ url('/pic-seminar/view-pembicara/'.$seminar->id) }}">
+                                                        <button class="btn btn-outline-dark mx-1 my-1" style="border-radius:20px" type="button" value="Pembicara">Pembicara</button>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5" class="text-center">Tidak ada data</td>
+                                                <td colspan="5" class="text-center">Data tidak ditemukan</td>
                                             </tr>
                                         @endforelse
                                     </tbody>

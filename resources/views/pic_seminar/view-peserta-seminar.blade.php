@@ -75,15 +75,19 @@
                                   <td>{{ $user->no_telp }}</td>
                                   <td>{{ $user->no_identitas }}</td>
                                   <td>{{ $user->sumber_info }}</td>
+                                  @php
+                                    $path = $user->poster;
+                                    $baseFilename = basename($path);
+                                  @endphp
                                   <td>
-                                    <a href="{{ Storage::url('poster/YFgih8yrsEnZfj9oQcoCA3tG2hhKgLiSSHpw9P58.jpg') }}" target="_blank" style="color:black; text-decoration:underline;"><button class="btn btn-outline-dark" style="border-radius: 20px;">Lihat</button></a>
+                                    <a href="{{ Storage::url($path) }}" target="_blank" style="color:black; text-decoration:underline;"><button class="btn btn-outline-dark" style="border-radius: 20px;">Lihat</button></a>
                                   </td>
                                   <td>{{ $user->tgl_pembayaran }}</td>
                                   <td>{{ $user->status_peserta }}<a href="{{ url('/pic-seminar/edit-status-peserta/'.$user->id) }}"><i class="ps-2 bi bi-pencil"></i></a></td>
                               </tr>
                         @empty
                               <tr>
-                                  <td colspan="10" class="text-center">Tidak ada data</td>
+                                  <td colspan="10" class="text-center">Belum ada data</td>
                               </tr>
                       @endforelse
                   </tbody>
