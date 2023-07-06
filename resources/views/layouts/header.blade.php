@@ -21,7 +21,7 @@
           </li>
           <li><a class="nav-link scrollto" href="{{url('dashboard')}}">Dashboard</a></li>
           <li><a class="nav-link scrollto" href="/request">Request Publish</a></li>
-          <li class="dropdown"><a><span>{{ auth()->user()->nama_user }}</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown" style="color:white"><a><span>{{ auth()->user()->nama_user }}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{url('profile')}}">Lihat Profil</a></li>
               <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -32,13 +32,23 @@
                   <li><a href="#">Deep Drop Down 4</a></li>
                   <li><a href="#">Deep Drop Down 5</a></li>
                 </ul></li>-->
-              <li>
-              <form action="/logout" method="post">
-                @csrf
-                
-                <button type="submit" class="btn btn-block btn-default " style="width:100%"; outline: none;" > logout</button>
-                </form>
-              </li>
+                <li>
+                  <a href="{{ route('logout') }}" onclick="event.preventDefault(); confirmLogout();">
+                    {{ __('Logout') }}
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                  </form>
+                </li>
+
+                <script>
+                  function confirmLogout() {
+                    if (confirm('Apakah Anda yakin ingin logout?')) {
+                      document.getElementById('logout-form').submit();
+                    }
+                  }
+                </script>
+
               <!-- <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li> -->
             </ul>

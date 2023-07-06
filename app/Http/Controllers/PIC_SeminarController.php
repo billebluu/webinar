@@ -18,6 +18,11 @@ class PIC_SeminarController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $seminars = PIC_Seminar::where('id_user', 3)->get();
