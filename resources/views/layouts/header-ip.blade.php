@@ -16,8 +16,8 @@
                 <button class="search" type="submit" name="search">Search</button>
             </form>
           </li> -->
-          <li><a class="nav-link scrollto" href="/dashboard">Dashboard</a></li>
-          <li><a class="nav-link scrollto" href="/pic-seminar">Request Publish</a></li>
+          <li><a class="nav-link scrollto" href="{{url('dashboard')}}">Dashboard</a></li>
+          <li><a class="nav-link scrollto" href="{{url('pic-seminar')}}">Request Publish</a></li>
           <li class="dropdown" style="color:white;"><a href="#"><span>{{ auth()->user()->nama_user }}</span> <i class="bi bi-chevron-down"></a></i>
             <ul>
               <li><a href="{{url('profile')}}">Lihat Profil</a></li>

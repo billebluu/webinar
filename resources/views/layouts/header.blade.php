@@ -20,7 +20,7 @@
             </form>
           </li> -->
           <li><a class="nav-link scrollto" href="{{url('dashboard')}}">Dashboard</a></li>
-          <li><a class="nav-link scrollto" href="/pic-seminar">Request Publish</a></li>
+          <li><a class="nav-link scrollto" href="{{url('pic-seminar')}}">Request Publish</a></li>
           <li class="dropdown" style="color:white"><a><span>{{ auth()->user()->nama_user }}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{url('profile')}}">Lihat Profil</a></li>
