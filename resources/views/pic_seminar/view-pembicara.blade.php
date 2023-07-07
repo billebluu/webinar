@@ -61,7 +61,7 @@
                                         $fileName = basename($pembicara->materi_seminar);
                                     @endphp
                                     <td class="text-center">
-                                        <a href="{{ Storage::url('materi/'.$fileName) }}" style="color:black; text-decoration:underline;"><button class="btn btn-outline-dark my-1 mx-1" style="border-radius: 20px;">Lihat Materi</button></a>
+                                        <a href="{{ Storage::url('materi/'.$fileName) }}" target="_blank" style="color:black; text-decoration:underline;"><button class="btn btn-outline-dark my-1 mx-1" style="border-radius: 20px;">Lihat Materi</button></a>
                                         <a href="{{ url('/pic-seminar/upload-ulang-materi/'.$pembicara->id) }}" style="color:black; text-decoration:underline;"><button class="btn btn-outline-dark my-1 mx-1" style="border-radius: 20px;">Upload Ulang Materi</button></a>
                                     </td>
                                     <td class="text-center">
