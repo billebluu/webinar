@@ -25,7 +25,8 @@ class PIC_SeminarController extends Controller
     
     public function index()
     {
-        $seminars = PIC_Seminar::where('id_user', 3)->get();
+        $user = DB::table('users')->where('id', auth()->user()->id)->first();
+        $seminars = PIC_Seminar::where('id_user', $user->id)->get();
 
         $id_pic = $seminars->pluck('id')->toArray();
         $rekap_peserta = Data_Pendaftaran::whereIn('id_pic_seminar', $id_pic)->count();
@@ -125,8 +126,10 @@ class PIC_SeminarController extends Controller
             }
         }
 
+        $user = DB::table('users')->where('id', auth()->user()->id)->first();
+
         PIC_Seminar::create([
-            'id_user' => 3,
+            'id_user' => $user->id,
             'nama_seminar' => $request->nama_seminar,
             'deskripi_seminar' => $request->deskripi_seminar,
             'lokasi_seminar' => $request->lokasi_seminar,
@@ -307,8 +310,10 @@ class PIC_SeminarController extends Controller
     {
         $keyword = $request->input('keyword');
 
+        $user = DB::table('users')->where('id', auth()->user()->id)->first();
+
         // Lakukan pencarian berdasarkan kata kunci
-        $seminars = PIC_Seminar::where('id_user', 3)
+        $seminars = PIC_Seminar::where('id_user', $user->id)
             ->where(function ($query) use ($keyword) {
                 $query->where('nama_seminar', 'LIKE', "%$keyword%")
                     ->orWhere('tanggal_seminar', 'LIKE', "%$keyword%")
@@ -318,11 +323,13 @@ class PIC_SeminarController extends Controller
             })
             ->get();
 
-        $id_pic = PIC_Seminar::where('id_user', 3)->pluck('id')->toArray();
+        $user = DB::table('users')->where('id', auth()->user()->id)->first();
+
+        $id_pic = PIC_Seminar::where('id_user', $user->id)->pluck('id')->toArray();
 
         $rekap_peserta = Data_Pendaftaran::whereIn('id_pic_seminar', $id_pic)->count();            
 
-        $rekap_seminar = PIC_Seminar::where('id_user', 3)
+        $rekap_seminar = PIC_Seminar::where('id_user', $user->id)
             ->where('status', 'accepted')
             ->count();
 
