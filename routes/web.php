@@ -14,13 +14,15 @@ use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\RegisterAdminController;
 
 
-
-Route::get('/', [UsersController::class, 'index']);
+Route::get('/', function () {
+    return view('landing-page');
+});
+// Route::get('/', [UsersController::class, 'index']);
 Route::get('/dashboard', [UsersController::class, 'index']);
-Route::get('/profile', [UsersController::class, 'index_profile'])->middleware('role');
+Route::get('/profile', [UsersController::class, 'index_profile']);
 // Route::get('/edit-user', [UsersController::class, 'index_profile']);
 Route::get('/profile/{id}/edit', [UsersController::class, 'edit'])->name('profile.edit-user');
-Route::get('/seminar/{id}', [PIC_SeminarController::class, 'show'])->name('dashboard.details-seminar')->middleware('role');
+Route::get('/seminar/{id}', [PIC_SeminarController::class, 'show'])->name('dashboard.details-seminar');
 
 Route::get('/users', [UsersController::class, 'users_layout']);
 Route::get('/users', [UsersController::class, 'create_layout']);
@@ -45,7 +47,7 @@ Route::put('/profile/{id}', [UsersController::class, 'update'])->name('profile.u
 //Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 // partnya billa
-Route::get('/pic-seminar', [PIC_SeminarController::class, 'index'])->middleware('role');
+Route::get('/pic-seminar', [PIC_SeminarController::class, 'index']);
 Route::get('/pic-seminar/create-seminar', [PIC_SeminarController::class, 'create_seminar'])->name('pic-seminar.create-seminar');
 Route::get('/pic-seminar/create-sertifikat/{id}', [PIC_SeminarController::class, 'create_sertifikat'])->name('pic-seminar.create-sertifikat');
 Route::get('/pic-seminar/create-pembicara/{id}', [PIC_SeminarController::class, 'create_pembicara'])->name('pic-seminar.create-pembicara');

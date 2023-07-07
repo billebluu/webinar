@@ -12,15 +12,15 @@
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li> -->
-          <li>
+          <!-- <li>
             <form action="/dashboard" method="post" class="d-flex" role="search">
               @csrf
                 <input class="form-control me-2" type="text" name="keyword" size="20" style="padding-right:50px"autofocus autocomplete="off" placeholder="Masukkan Keyword" aria-label="Search">
                 <button class="search" type="submit" name="search">Search</button>
             </form>
-          </li>
+          </li> -->
           <li><a class="nav-link scrollto" href="{{url('dashboard')}}">Dashboard</a></li>
-          <li><a class="nav-link scrollto" href="/request">Request Publish</a></li>
+          <li><a class="nav-link scrollto" href="/pic-seminar">Request Publish</a></li>
           <li class="dropdown" style="color:white"><a><span>{{ auth()->user()->nama_user }}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{url('profile')}}">Lihat Profil</a></li>

@@ -19,13 +19,27 @@ class UsersController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index(Request $request)
     {
-        // $datas = User::all();
-        // return view('users', compact('datas'));
+        $keyword = $request->keyword;
+
+        $pic_seminar = PIC_Seminar::where(function ($query) use ($keyword) {
+            $query->where('nama_seminar', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('tanggal_seminar', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('lokasi_seminar', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('gratis_berbayar', 'LIKE', '%' . $keyword . '%');
+                
+
+        })
+        ->where('status', 'accepted')
+        ->paginate(12);
+
+        $pic_seminar->withPath('users');
+        $pic_seminar->appends($request->all());
+
+        return view('dashboard.users', compact('pic_seminar', 'keyword'));
         $pic_seminar = PIC_Seminar::all();
 
-        return view('dashboard.users',['pic_seminar' => $pic_seminar]);
 
     }
 

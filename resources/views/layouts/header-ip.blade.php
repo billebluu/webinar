@@ -9,16 +9,16 @@
       @auth
         <ul>
           
-          <li>
+          <!-- <li>
             <form action="/dashboard" method="post" class="d-flex" role="search">
               @csrf
                 <input class="form-control me-2" type="text" name="keyword" size="20" style="padding-right:50px"autofocus autocomplete="off" placeholder="Masukkan Keyword" aria-label="Search">
                 <button class="search" type="submit" name="search">Search</button>
             </form>
-          </li>
-          <li><a class="nav-link scrollto" href="/request">Request Publish</a></li>
+          </li> -->
           <li><a class="nav-link scrollto" href="/dashboard">Dashboard</a></li>
-          <li class="dropdown" style="color:white;"><span>{{ auth()->user()->nama_user }}</span> <i class="bi bi-chevron-down"></i>
+          <li><a class="nav-link scrollto" href="/pic-seminar">Request Publish</a></li>
+          <li class="dropdown" style="color:white;"><a href="#"><span>{{ auth()->user()->nama_user }}</span> <i class="bi bi-chevron-down"></a></i>
             <ul>
               <li><a href="{{url('profile')}}">Lihat Profil</a></li>
               <li><a href="{{url('event-request')}}">Event Request</a></li>
