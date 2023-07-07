@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PIC_Seminar>
@@ -16,8 +17,9 @@ class PIC_SeminarFactory extends Factory
      */
     public function definition(): array
     {
+        $userIds = User::pluck('id')->toArray(); 
         return[
-            'id_user' => 3,
+            'id_user' => $this->faker->randomElement($userIds),
             'nama_seminar' => fake()->word(rand(8,15),true),
             'deskripi_seminar' => fake()->text(),
             'lokasi_seminar' => fake()->address(),
@@ -29,11 +31,8 @@ class PIC_SeminarFactory extends Factory
             'tgl_pendaftaran_akhir' => fake()->date(),
             'setup_tgl_unduh' => fake()->date(),
             'sertifikat' => fake()->image(),
-            'ukuran_poster' => fake()->randomDigit(),
-            'nama_poster' => fake()->word(rand(8,15),true),
-            'ekstensi_poster' => $this->faker->randomElement(['png', 'jpg', 'jpeg']),
             'poster' => fake()->image(),
-
+            'status' => $this->faker->randomElement(['PENDING'])
         ];
     }
 }

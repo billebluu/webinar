@@ -1,7 +1,9 @@
-@extends('layouts.aplikasi')
-@section('content')
+@extends('layouts-admin.main-login')
+@section('title','Login SeminarKu')
 
-    <section class="vh-100">
+    
+@section('container')
+<section class="vh-100">
         <div class="container py-5 h-100">
           <div class="row d-flex align-items-center justify-content-center h-100">
             <div class="col-md-8 col-lg-7 col-xl-6">
@@ -11,18 +13,43 @@
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <h2>Login To Your Account</h2>
                 <br>
-              <form method="post" action="/login">
+                <!-- Alert Sukses Registrasi -->
+                @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+
+                <!-- Alert Gagal Login -->
+                @if(session()->has('loginError'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('loginError') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+
+            <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="form-outline mb-4">
                     <label class="form-label" for="email_user">Email address</label>
-                  <input type="email" id="email_user" class="form-control form-control-lg" name="email_user" required />
+                  <input type="email" id="email_user" class="form-control form-control-lg" name="email_user" autofocus required/>
+                  @error('email_user')
+                  <span class="invalid-feedback" role="alert">
+                     <strong>{{ $message }}</strong>
+                  </span> 
+                  @enderror               
                 </div>
       
                 
                 <div class="form-outline mb-4">
                 <label class="form-label" for="password">Password</label>
                   <input type="password" id="password" class="form-control form-control-lg" name="password" required />
-                 
+                  @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
 
                 <div>
@@ -31,7 +58,7 @@
                 
                 <br>
                 <div class="text-center">
-                    <p>If you Doesn't Have an Account <a href="/register">Sign Up !</a></p>
+                    <p>If you Doesn't Have an Account <a href="{{ route('register') }}">Sign Up !</a></p>
                     
                   </div>
       
@@ -40,4 +67,4 @@
           </div>
         </div>
       </section>
-@endsection 
+@endsection

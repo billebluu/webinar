@@ -14,6 +14,11 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         // $datas = User::all();
@@ -115,6 +120,11 @@ class UsersController extends Controller
     public function edit_layout(){
         return view('users');
     }
+
+    public function register_seminar(){
+        return view('pendaftaran');
+    }
+
 
     public function logout(Request $request)
     {
