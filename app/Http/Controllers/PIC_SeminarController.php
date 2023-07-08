@@ -41,6 +41,8 @@ class PIC_SeminarController extends Controller
             $seminar->pembicara = $pembicara;
         }
 
+        $seminars = $seminars->sortByDesc('tanggal_seminar');
+        
         return view('pic_seminar.list-seminar', compact('seminars', 'rekap_peserta', 'rekap_seminar'));
     }
 
@@ -140,7 +142,7 @@ class PIC_SeminarController extends Controller
             'tgl_pendaftaran_awal' => $request->tgl_pendaftaran_awal,
             'tgl_pendaftaran_akhir' => $request->tgl_pendaftaran_akhir,
             'poster' => $posterPath,
-            'status' => 'pending'
+            'status' => 'PENDING'
         ]);
 
         return redirect('/pic-seminar');
