@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PIC_SeminarController;
+use App\Http\Controllers\PembicaraController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
