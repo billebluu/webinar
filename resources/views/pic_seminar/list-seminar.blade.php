@@ -79,14 +79,18 @@
                                             <th class="text-center">Pembicara</th>
                                             <th class="text-center">Jumlah Peserta</th>
                                             <th class="text-center">Status Validasi</th>
-                                            <th class="text-center">Action</th>
+                                            <th class="text-center">More</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         @forelse($seminars as $seminar)
                                             <tr>
-                                                <td>{{ $seminar->nama_seminar }}</td>
+                                                @if ($seminar->gratis_berbayar === 'Gratis')
+                                                <td>{{ $seminar->nama_seminar }}<span class="btn btn-dark" style="margin-left: 7px; padding: 2px 5px; border-radius:20px; font-size:small;" disabled>Gratis</span></td>
+                                                @else ($seminar->gratis_berbayar === 'Berbayar')
+                                                <td>{{ $seminar->nama_seminar }}<span class="btn btn-dark" style="margin-left: 7px; padding: 2px 5px; border-radius:20px; font-size:small;" disabled>Berbayar</span></td>
+                                                @endif
                                                 <td class="text-center">{{ $seminar->tanggal_seminar }}</td>
                                                 <td class="text-start">
                                                     <ol>
@@ -96,13 +100,13 @@
                                                     </ol>
                                                 </td>
                                                 <td class="text-center">{{ $seminar->jumlah_peserta }}</td>
-                                                @if ($seminar->status === 'pending')
+                                                @if ($seminar->status === 'PENDING')
                                                 <td class="text-center">Mohon menunggu validasi</td>
                                                 @elseif ($seminar->status === '' || $seminar->status === 'null')
                                                 <td class="text-center">-</td>
-                                                @elseif ($seminar->status === 'accepted')
+                                                @elseif ($seminar->status === 'ACCEPTED')
                                                 <td class="text-center" style="color: green;">Seminar Anda diterima <br> & dipublikasikan</td>
-                                                @else ($seminar->status === 'rejected')
+                                                @else ($seminar->status === 'REJECTED')
                                                 <td class="text-center" style="color: red;">Seminar Anda ditolak</td>
                                                 @endif
                                                 <td class="text-center">
