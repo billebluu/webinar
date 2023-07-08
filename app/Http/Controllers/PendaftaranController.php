@@ -89,18 +89,19 @@ public function store(Request $request)
      * Display the specified resource.
      */
    
-    public function unduhSertifikat($id_pic_seminar)
-    {
-        // Ambil path file sertifikat berdasarkan $id_pic_seminar
-        $sertifikatPath = "sertifikat/{$id_pic_seminar}.png";
-        //F:\laravel\webinar_laravel\webinar_laravel\webinar_laravel\public\storage\sertifikat\7.png
-
-        if (Storage::disk('public')->exists($sertifikatPath)) {
-            return response()->download(storage_path('app/public/' . $sertifikatPath));
-        } else {
-            abort(404, 'File sertifikat tidak ditemukan');
-        }
-    }
+     public function unduhSertifikat($id_pic_seminar)
+     {
+         // Ambil path file sertifikat berdasarkan $id_pic_seminar
+         $seminar = PIC_Seminar::find($id_pic_seminar);
+         $fileName = basename($seminar->sertifikat);
+     
+         if (Storage::exists('public/sertifikat/' . $fileName)) {
+             return response()->download(storage_path('app/public/sertifikat/' . $fileName));
+         } else {
+             abort(404, 'File sertifikat tidak ditemukan');
+         }
+     }
+     
     }
 
 
