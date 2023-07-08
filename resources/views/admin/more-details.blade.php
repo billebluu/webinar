@@ -257,7 +257,10 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <img src="{{ asset('assets/img/skills.png') }}" width="90%" align="center" alt="">
+                @php
+                    $fileName = basename($seminar->poster);
+                @endphp
+                <img src="{{  Storage::url('poster/' . $fileName) }}" width="90%" align="center" alt="poster_seminar">
             </div>
         </div>
     </div>
