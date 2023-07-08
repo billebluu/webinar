@@ -29,7 +29,10 @@
           <div class="swiper-wrapper align-items-center">
             <div class="swiper-slide">
             <!-- <img src="{{ asset('assets/img/skills.png') }}" width="90%" align="center" alt=""> -->
-            <img src="{{ asset('storage/posters/' . $seminar->poster) }}" width="90%" align="center" alt="poster_seminar">
+            @php
+              $fileName = basename($seminar->poster);
+            @endphp
+            <img src="{{  Storage::url('poster/' . $fileName) }}" width="90%" align="center" alt="poster_seminar">
             </div>
 
 

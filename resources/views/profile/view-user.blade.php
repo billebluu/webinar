@@ -94,7 +94,7 @@
 								<div class="card-body">
 								<div>
 									<div class="d-flex justify-content-between">
-									<h5><a href="{{ route('dashboard.details-seminar', $a->id) }}" style="color: black; text-decoration: none;" onmouseover="this.style.color='blue'; this.style.fontWeight='bold';" onmouseout="this.style.color='black'; this.style.fontWeight='normal';">{{ $a->picSeminar->nama_seminar }}</a></h5>
+									<h5><a href="{{ route('dashboard.details-seminar', $a->id_pic_seminar) }}" style="color: black; text-decoration: none;" onmouseover="this.style.color='blue'; this.style.fontWeight='bold';" onmouseout="this.style.color='black'; this.style.fontWeight='normal';">{{ $a->picSeminar->nama_seminar }}</a></h5>
 
 									
 										
