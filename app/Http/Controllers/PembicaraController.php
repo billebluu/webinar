@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Storage;
 class PembicaraController extends Controller
 {
     public function unduhMateriSeminar($id_pembicara)
-    {
-        $pembicara = Pembicara::find($id_pembicara);
+{
+    $pembicara = Pembicara::findOrFail($id_pembicara);
+    $fileName = basename($pembicara->materi_seminar);
 
-        // Cek apakah materi seminar tersedia
-        if ($pembicara && $pembicara->materi_seminar) {
-            $materiPath = 'materi/' . $pembicara->materi_seminar;
-            $fullPath = storage_path('app/public/' . $materiPath);
-            return response()->file($fullPath, ['Content-Type' => 'application/pdf']);
-        } else {
-            abort(404, 'Materi Seminar tidak tersedia');
-        }
+    // Cek apakah materi seminar tersedia
+    if (Storage::exists('public/materi/' . $fileName)) {
+        return response()->download(storage_path('app/public/materi/' . $fileName));
+    } else {
+        abort(404, 'File materi tidak ditemukan');
     }
+}
+
 }
