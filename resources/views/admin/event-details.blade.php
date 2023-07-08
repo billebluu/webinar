@@ -291,7 +291,6 @@
                         <th>Nama Seminar</th>
                         <th>Poster</th>
                         <th>Tanggal</th>
-                        <th>Status</th>
                         <th colspan="2">Manajemen</th>
                     </tr>
                 </thead>
@@ -301,7 +300,6 @@
                         <th>Nama Seminar</th>
                         <th>Poster</th>
                         <th>Tanggal</th>
-                        <th>Status</th>
                         <th colspan="2">Manajemen</th>
                     </tr>
                 </tfoot>
@@ -316,7 +314,6 @@
                         @endphp
                         <td><img src="{{  Storage::url('poster/' . $fileName) }}" width="90%" align="center" alt="poster_seminar"></td>
                         <td>{{ $value->tanggal_seminar }}</td>
-                        <td>{{ $value->status }}</td>
                         <td><a class="btn btn-primary" href="{{ route('admin.more-details', $value->id) }}">DETAILS</a></td>
                         <td>
                             <a class="btn btn-danger" data-toggle="modal"  href="#"  data-target="#deleteModal<?= $value["id"]; ?>">DELETE</a>                       

@@ -163,6 +163,8 @@
                         <th>No</th>
                         <th>User</th>
                         <th>Email</th>
+                        <th>Nomor Telepon</th>
+                        <th>Asal Instansi</th>
                         <th>Manajemen</th>
                     </tr>
                 </thead>
@@ -171,6 +173,8 @@
                         <th>No</th>
                         <th>User</th>
                         <th>Email</th>
+                        <th>Nomor Telepon</th>
+                        <th>Asal Instansi</th>
                         <th>Manajemen</th>
                     </tr>
                 </tfoot>
@@ -181,6 +185,9 @@
                         <td>{{ $user->firstItem() + $i }}</td>
                         <td>{{ $value->nama_user }}</td>
                         <td>{{ $value->email_user }}</td>
+                        <td>{{ $value->no_telp }}</td>
+                        <td>{{ $value->asal_instansi }}</td>
+
                         <td>
                             <a class="btn btn-danger" data-toggle="modal"  href="#"  data-target="#deleteModal<?= $value["id"]; ?>">DELETE</a>                                        
                         </td>
