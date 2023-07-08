@@ -20,4 +20,9 @@ class Data_Pendaftaran extends Model
         'status_peserta'
         
     ];
+
+    public function picSeminar()
+        {
+        return $this->belongsTo(PIC_Seminar::class, 'id_pic_seminar');
+        }
 }

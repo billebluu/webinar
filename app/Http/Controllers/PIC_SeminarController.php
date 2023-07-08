@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Data_Pendaftaran;
+use App\Models\Pembicara;
 use App\Models\PIC_Seminar;
 use App\Models\User;
-use App\Models\Pembicara;
-use App\Models\Data_Pendaftaran;
 use App\Models\Users;
 use Dflydev\DotAccessData\Data;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PIC_SeminarController extends Controller
@@ -361,6 +361,9 @@ class PIC_SeminarController extends Controller
 
         return redirect()->back()->with('message', 'Data pembicara berhasil dihapus.');
     }
+
+   
+
 
     /**
      * Show the form for editing the specified resource.

@@ -98,3 +98,14 @@ Route::get('/admin/home', [App\Http\Controllers\AdminController::class, 'show_ev
 Route::get('/pendaftaran', [UsersController::class, 'register_seminar']);
 
 Route::post('/submitpendaftaran', [PendaftaranController::class,'insert']);
+
+//tambah
+Route::get('/unduh-sertifikat/{id_pic_seminar}', [PendaftaranController::class, 'unduhSertifikat'])->name('unduh-sertifikat');
+Route::get('/unduh-materi/{id_pembicara}', [PembicaraController::class, 'unduhMateriSeminar'])->name('unduh-materi');
+// Route::get('/pendaftaran/{id_pic_seminar}/{id_users}', [PendaftaranController::class, 'create'])->name('pendaftaran.create')->middleware('auth');
+
+Route::get('/pendaftaran/{id_pic_seminar}/{id_users}', [PendaftaranController::class, 'create'])
+    ->name('pendaftaran.create')
+    ->middleware('auth');
+
+Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');

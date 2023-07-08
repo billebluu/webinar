@@ -32,4 +32,9 @@ class Pembicara extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function picSeminar()
+{
+    return $this->belongsTo(PIC_Seminar::class, 'id_pic_seminar');
+}
 }

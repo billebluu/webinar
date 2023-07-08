@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Data_Pendaftaran;
 
 class PIC_Seminar extends Model
 {
@@ -41,4 +42,13 @@ class PIC_Seminar extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+    public function pembicara()
+    {
+        return $this->hasMany(Pembicara::class, 'id_pic_seminar');
+    }
+    public function dataPendaftaran()
+    {
+        return $this->hasMany(Data_Pendaftaran::class, 'id_pic_seminar', 'id');
+
+    }
 }
