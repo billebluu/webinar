@@ -86,9 +86,13 @@ class AdminController extends Controller
         $keyword = $request->keyword;
 
         // $user = User::all();
-        $user = User::where('nama_user','LIKE', '%'.$keyword.'%')
-                    ->orWhere('email_user','LIKE', '%'.$keyword.'%')
-                    ->paginate(10);
+        $user = User::where(function ($query) use ($keyword) {
+            $query->where('nama_user', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('email_user', 'LIKE', '%' . $keyword . '%');
+        })
+        ->where('role', 'User')
+        ->paginate(10);
+        
         $user->withPath('user-details');
         $user->appends($request->all());
 
