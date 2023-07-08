@@ -40,7 +40,7 @@
                         <div class="mb-3 form-group">
                             <label for="setup_tgl_unduh" class="form-label">Tanggal Pengiriman Sertifikat</label>
                             <input type="date" name="setup_tgl_unduh" value="{{ session('setup_tgl_unduh') }}" class="form-control @error('setup_tgl_unduh') is-invalid @enderror" id="setup_tgl_unduh" aria-describedby="setup_tgl_unduh">
-                            <p class="px-2 py-2" style="font-size: 13px;">* Sertifikat akan dikirim ke email peserta dan dapat diakses oleh peserta pada tanggal yang Anda tetapkan</p>
+                            <p class="px-2 py-2" style="font-size: 13px;">* Sertifikat akan ditampilkan ke profil peserta dan dapat diunduh oleh peserta pada tanggal yang Anda tetapkan</p>
                             @error('setup_tgl_unduh')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
