@@ -30,7 +30,7 @@ class PIC_SeminarController extends Controller
 
         $id_pic = $seminars->pluck('id')->toArray();
         $rekap_peserta = Data_Pendaftaran::whereIn('id_pic_seminar', $id_pic)->count();
-        $rekap_seminar = $seminars->where('status', 'accepted')->count();
+        $rekap_seminar = $seminars->where('status', 'ACCEPTED')->count();
 
         foreach ($seminars as $seminar) {
             $id = $seminar->id;
@@ -183,7 +183,7 @@ class PIC_SeminarController extends Controller
     {
         $this->validate($request, [
             'id' => 'required',
-            'sertifikat' => 'required|image|mimes:jpg, jpeg, png',
+            'sertifikat' => 'required|image|mimes:png,jpg,jpeg',
             'setup_tgl_unduh' => 'required'
         ]);
 
@@ -332,7 +332,7 @@ class PIC_SeminarController extends Controller
         $rekap_peserta = Data_Pendaftaran::whereIn('id_pic_seminar', $id_pic)->count();            
 
         $rekap_seminar = PIC_Seminar::where('id_user', $user->id)
-            ->where('status', 'accepted')
+            ->where('status', 'ACCEPTED')
             ->count();
 
         foreach ($seminars as $seminar) {
