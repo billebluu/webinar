@@ -28,7 +28,8 @@
         <div class="portfolio-details-slider swiper">
           <div class="swiper-wrapper align-items-center">
             <div class="swiper-slide">
-            <img src="{{ asset('assets/img/skills.png') }}" width="90%" align="center" alt="">
+            <!-- <img src="{{ asset('assets/img/skills.png') }}" width="90%" align="center" alt=""> -->
+            <img src="{{ asset('storage/posters/' . $seminar->poster) }}" width="90%" align="center" alt="poster_seminar">
             </div>
 
 
@@ -48,6 +49,15 @@
             <li><strong>Tanggal Pendaftaran Awal</strong>: {{ date('d-m-Y', strtotime($seminar->tgl_pendaftaran_awal)) }}</li>
             <li><strong>Tanggal Pendaftaran Awal</strong>: {{ date('d-m-Y', strtotime($seminar->tgl_pendaftaran_akhir)) }}</li>
           </ul>
+          <form action="{{ route('pendaftaran.create', ['id_pic_seminar' => $seminar->id, 'id_users' => Auth::user()->id]) }}" method="get">
+          @if ($seminar && $seminar->dataPendaftaran && $seminar->dataPendaftaran->contains('id_users', Auth::user()->id))
+        <button class="btn btn-primary mx-2" type="button" disabled>Sudah Mendaftar</button>
+        @else
+        <button class="btn btn-primary mx-2" type="submit">Register</button>
+         @endif
+</form>
+        </form>
+        </form>
         </div>
         <div class="portfolio-description">
           <h2>Deskripsi Seminar</h2>

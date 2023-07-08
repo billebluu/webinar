@@ -34,6 +34,13 @@
           <h2>Seminar yang akan berlangsung</h2>
           <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
         </div>
+        @if(session('success'))
+        <script>
+          window.onload = function() {
+            alert('{{ session('success') }}');
+          };
+        </script>
+        @endif
 
         <div class="row">
         
@@ -42,13 +49,14 @@
                 <input class="form-control me-2" type="text" name="keyword" size="20" style="padding-right:50px"autofocus autocomplete="off" placeholder="Masukkan Keyword" aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
             </form>
-     
+      <br>
+      <br>
         <?php $i = 1; ?>
         @foreach ($pic_seminar as $row)
 
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-3" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
-              <div class="icon"><img src="{{ asset('assets/img/skills.png') }}" width="90%" align="center"></div>
+              <div class="icon"><img src="{{ asset('storage/posters/' . $row->poster) }}" width="90%" align="center"></div>
               <h4><a href="{{ route('dashboard.details-seminar', $row->id) }}">{{ $row->nama_seminar }}</a></h4>
               <p>
                   <b>Tanggal:</b> {{ date('d-m-Y', strtotime($row->tanggal_seminar)) }} <br>

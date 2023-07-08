@@ -24,6 +24,10 @@ class PendaftaranController extends Controller
     {
         //
     }
+    public function __construct()
+     {
+         $this->middleware('auth');
+     }
 
     /**
      * Show the form for creating a new resource.
@@ -78,7 +82,7 @@ public function store(Request $request)
     $model->status_peserta = 'Peserta';
     $model->save();
 
-    return redirect('/dashboard')->withSuccess('Pendaftaran berhasil.');
+    return redirect('/dashboard')->withSuccess('Pendaftaran berhasil. Silahkan Mendaftar di Seminar Lainnya');
 }
     
     /**

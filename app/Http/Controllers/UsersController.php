@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
+use App\Models\Data_Pendaftaran;
 use App\Models\PIC_Seminar;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 
 class UsersController extends Controller
@@ -48,9 +50,12 @@ class UsersController extends Controller
         // $datas = User::all();
         // return view('users', compact('datas'));
         // $user = User::all();
-        $user = DB::table('users')->where('id', auth()->user()->id)->first();
+        $user = auth()->user();
+        $acara = Data_Pendaftaran::whereHas('picSeminar', function ($query) use ($user) {
+        $query->where('id_users', $user->id);
+         })->get();
 
-        return view('profile.view-user',['user' => $user]);
+         return view('profile.view-user', ['user' => $user, 'acara' => $acara]);
 
     }
 
@@ -92,7 +97,10 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::where('id',auth()->user()->id)->post();
+        // $user = User::where('id',auth()->user()->id)->post();
+        $user = User::find($id);
+
+        // Mengirim data pengguna ke view edit profile
         return view('profile.edit-user', compact('user'));
     }
 
@@ -101,15 +109,16 @@ class UsersController extends Controller
      */
     public function update(Request $request,string $id)
     {
-        $model = User::where('id',auth()->user()->id)->post();
-        $model->password = 1;
+        $model = User::findOrFail($id);
         $model->nama_user = $request->nama_user;
         $model->email_user = $request->email_user;
         $model->asal_instansi = $request->asal_instansi;
         $model->no_telp = $request->no_telp;
         $model->save();
-
+    
         return redirect('profile')->with('success', 'Profil berhasil diperbarui');
+
+        
     }
 
     /**
