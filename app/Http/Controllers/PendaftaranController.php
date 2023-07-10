@@ -67,8 +67,7 @@ public function store(Request $request)
         $buktibayar = $request->file('bukti_pembayaran');
 
         if (!is_null($buktibayar)) {
-            $bukti_bayarPath = 'public/pendaftaranimg' . uniqid() . '.' . $buktibayar->getClientOriginalExtension();
-            $buktibayar->storeAs('public/pendaftaranimg', $bukti_bayarPath);
+            $bukti_bayarPath = $buktibayar->store('public/bukti_pembayaran');
         }
     }
 
