@@ -95,7 +95,7 @@ Route::delete('/seminar/reject/{id}', [AdminController::class, 'reject'])->name(
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\UsersController::class, 'index'])->name('home');
-Route::get('/admin/home', [App\Http\Controllers\AdminController::class, 'show_event'])->name('admin-home')->middleware('role');//daftar
+Route::get('/admin/home', [App\Http\Controllers\AdminController::class, 'index'])->name('admin-home')->middleware('role');//daftar
 Route::get('/pendaftaran', [UsersController::class, 'register_seminar']);
 
 Route::post('/submitpendaftaran', [PendaftaranController::class,'insert']);

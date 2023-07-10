@@ -92,25 +92,26 @@
 
             
             <div class="topbar-divider d-none d-sm-block"></div>
-
+            @auth
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin SeminarKu</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->nama_user }}</span>
                     <!-- <img class="img-profile rounded-circle"
                         src="img/undraw_profile.svg"> -->
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
-                    
+                   
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
                     </a>
                 </div>
+                @endauth
                  <!-- Logout Modal-->
                     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -146,9 +147,7 @@
 
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Data User</h1>
-<!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-    For more information about DataTables, please visit the <a target="_blank"
-        href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -163,6 +162,8 @@
                         <th>No</th>
                         <th>User</th>
                         <th>Email</th>
+                        <th>Nomor Telepon</th>
+                        <th>Asal Instansi</th>
                         <th>Manajemen</th>
                     </tr>
                 </thead>
@@ -171,6 +172,8 @@
                         <th>No</th>
                         <th>User</th>
                         <th>Email</th>
+                        <th>Nomor Telepon</th>
+                        <th>Asal Instansi</th>
                         <th>Manajemen</th>
                     </tr>
                 </tfoot>
@@ -181,6 +184,9 @@
                         <td>{{ $user->firstItem() + $i }}</td>
                         <td>{{ $value->nama_user }}</td>
                         <td>{{ $value->email_user }}</td>
+                        <td>{{ $value->no_telp }}</td>
+                        <td>{{ $value->asal_instansi }}</td>
+
                         <td>
                             <a class="btn btn-danger" data-toggle="modal"  href="#"  data-target="#deleteModal<?= $value["id"]; ?>">DELETE</a>                                        
                         </td>

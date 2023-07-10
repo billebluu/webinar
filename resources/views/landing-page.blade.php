@@ -67,10 +67,7 @@
             <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
             <h1>Discover Exciting Events</h1>
           <h2>Explore a Wide Array of Engaging Activities!</h2>
-            <!-- <div class="d-flex justify-content-center justify-content-lg-start">
-                <a href="#about" class="btn-get-started scrollto">Get Started</a>
-                <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
-            </div> -->
+          
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
             <img src="{{ asset('assets/img/hero-img.png')}}" class="img-fluid animated" alt="">
@@ -91,10 +88,7 @@
     &copy; Copyright <strong><span>SeminarKu</span></strong>. All Rights Reserved
   </div>
   <div class="credits">
-    <!-- All the links in the footer should remain intact. -->
-    <!-- You can delete the links only if you purchased the pro version. -->
-    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+  
     Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
   </div>
 </div>
