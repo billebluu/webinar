@@ -65,7 +65,7 @@
         <div class="portfolio-description">
           <h2>Deskripsi Seminar</h2>
           <p>
-            {{ $seminar->deskripi_seminar }}          
+          {!! nl2br(e($seminar->deskripi_seminar)) !!}        
           </p>
         </div>
       </div>

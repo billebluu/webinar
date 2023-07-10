@@ -116,7 +116,7 @@
 											<div class="d-flex justify-content-between">
 												<h6>{{ $pembicara->nama_pembicara }}</h6>
 												@if ($pembicara->materi_seminar)
-													<a href="{{ route('unduh-materi', ['id_pembicara' => $pembicara->id]) }}" class="btn btn-primary">Unduh Materi</a>
+													<a href="{{ route('unduh-materi', ['id_pembicara' => $pembicara->id]) }}" class="btn btn-primary my-2">Unduh Materi</a>
 												@else
 													<span class="text-muted">Materi tidak tersedia</span>
 												@endif
