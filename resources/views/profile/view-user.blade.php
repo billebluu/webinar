@@ -31,7 +31,7 @@
 						@if(session('success'))
 						<script>
 						window.onload = function() {
-							alert('{{ session('success') }}');
+							alert("{{ session('success') }}");
 						};
 						</script>
 						@endif
@@ -102,7 +102,7 @@
 										@if (now()->gte($a->picSeminar->setup_tgl_unduh))
                                         <a href="{{ route('unduh-sertifikat', ['id_pic_seminar' => $a->picSeminar->id]) }}" class="btn btn-primary">Unduh Sertifikat</a>
                                         @else
-                                        <span class="text-muted">Belum tersedia</span>
+                                        <span class="text-muted">Sertifikat Belum tersedia</span>
                                         @endif
 
 									</div>

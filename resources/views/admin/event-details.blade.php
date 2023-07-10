@@ -183,7 +183,7 @@
                         @php
                             $fileName = basename($value->poster);
                         @endphp
-                        <td><img src="{{  Storage::url('poster/' . $fileName) }}" width="90%" align="center" alt="poster_seminar"></td>
+                        <td><img src="{{  Storage::url('poster/' . $fileName) }}" width="40%" align="center" alt="poster_seminar"></td>
                         <td>{{ $value->tanggal_seminar }}</td>
                         <td><a class="btn btn-primary" href="{{ route('admin.more-details', $value->id) }}">DETAILS</a></td>
                         <td>
